@@ -1,6 +1,8 @@
 
+
 TPL_FILES=ctl/controls.tpl
 XCSS_FILES=ctl/style.xcss
+JS_FILES=
 
 default: update_styles update_scripts update_images
 

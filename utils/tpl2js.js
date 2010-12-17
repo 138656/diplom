@@ -253,6 +253,16 @@ r.push("var arr = $args[0];\n")
 r.push("if(arr instanceof Array) {\nfor(var i=0; i<arr.length; i++) $args.yield([arr[i], i], $out);\n}")
 r.push(" else {\nfor(var i in arr) $args.yield([arr[i], i], $out);\n} }\n")
 
+var plugins_dir = path.join(__dirname, "plugins")
+var plugins = fs.readdirSync(plugins_dir)
+for(var i in plugins) {
+	r.push("$ctx[")
+	r.push(JSON.stringify(plugins[i].replace(/\.js$/, "")))
+	r.push("] = ")
+	r.push(fs.readFileSync(path.join(plugins_dir, plugins[i])))
+	r.push(";\n")
+}
+
 r.push("var includes = ")
 r.push(JSON.stringify(includes))
 r.push(";\n")

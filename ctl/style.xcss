@@ -1,0 +1,47 @@
+
+/* Some code and idea I take from jQueryUI */
+
+color-normal: #2E6E9E;
+color-hover: ${color-normal};
+color-active: #E17009;
+color-text: #222222;
+
+border-color-normal: #C5DBEC;
+border-color-hover: #79B7E7;
+border-color-active: ${border-color-hover};
+
+round-radius: 5px;
+
+round-tl { -moz-border-radius-topleft: ${round-radius}; -webkit-border-top-left-radius: ${round-radius}; border-top-left-radius: ${round-radius}; }
+round-tr { -moz-border-radius-topright: ${round-radius}; -webkit-border-top-right-radius: ${round-radius}; border-top-right-radius: ${round-radius}; }
+round-bl { -moz-border-radius-bottomleft: ${round-radius}; -webkit-border-bottom-left-radius: ${round-radius}; border-bottom-left-radius: ${round-radius}; }
+round-br { -moz-border-radius-bottomright: ${round-radius}; -webkit-border-bottom-right-radius: ${round-radius}; border-bottom-right-radius: ${round-radius}; }
+round-top { -moz-border-radius-topleft: ${round-radius}; -webkit-border-top-left-radius: ${round-radius}; border-top-left-radius: ${round-radius}; -moz-border-radius-topright: ${round-radius}; -webkit-border-top-right-radius: ${round-radius}; border-top-right-radius: ${round-radius}; }
+round-bottom { -moz-border-radius-bottomleft: ${round-radius}; -webkit-border-bottom-left-radius: ${round-radius}; border-bottom-left-radius: ${round-radius}; -moz-border-radius-bottomright: ${round-radius}; -webkit-border-bottom-right-radius: ${round-radius}; border-bottom-right-radius: ${round-radius}; }
+round-right {  -moz-border-radius-topright: ${round-radius}; -webkit-border-top-right-radius: ${round-radius}; border-top-right-radius: ${round-radius}; -moz-border-radius-bottomright: ${round-radius}; -webkit-border-bottom-right-radius: ${round-radius}; border-bottom-right-radius: ${round-radius}; }
+round-left { -moz-border-radius-topleft: ${round-radius}; -webkit-border-top-left-radius: ${round-radius}; border-top-left-radius: ${round-radius}; -moz-border-radius-bottomleft: ${round-radius}; -webkit-border-bottom-left-radius: ${round-radius}; border-bottom-left-radius: ${round-radius}; }
+round-all { -moz-border-radius: ${round-radius}; -webkit-border-radius: ${round-radius}; border-radius: ${round-radius}; }
+
+bg-normal { backgroung-image: url("img/bg_dark.png"); backgroung-position: center center; }
+bg-hover(bg-normal) { backgroung-image: url("img/bg_middle.png"); }
+bg-active(bg-normal) { backgroung-image: url("img/bg_light.png"); }
+
+cl-normal { color: ${color-normal}; }
+cl-hover { color: ${color-hover}; }
+cl-active { color: ${color-active}; }
+cl-text { color: ${color-text}; }
+
+border-normal { border-width: 1px; border-color: ${border-color-normal}; border-style: solid; }
+border-hover (border-normal) { border-color: ${border-color-hover}; }
+border-active (border-normal) { border-color: ${border-color-active}; }
+
+font-caption { font-family: Lucida Grande, Lucida Sans, Arial, sans-serif; font-size: 12px; }
+font-text { font-family: Lucida Grande, Lucida Sans, Arial, sans-serif; font-size: 14px; }
+font-title { font-family: Lucida Grande, Lucida Sans, Arial, sans-serif; font-size: 16px; }
+
+
+ctl [
+	include("button/button.xcss");
+]
+
+

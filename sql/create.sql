@@ -2,7 +2,9 @@
 
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
-	name VARCHAR(100)[3] NOT NULL,
+	name1 VARCHAR(100) NOT NULL,
+	name2 VARCHAR(100) NOT NULL,
+	name3 VARCHAR(100),
 	address TEXT,
 	phone VARCHAR(100),
 	photo BYTEA,

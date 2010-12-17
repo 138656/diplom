@@ -108,7 +108,7 @@ function parse_file(file_name) {
 				return get_val(nd)
 		} else if(nd.name=="directive") {
 			var c = nd.children
-			var nm = path.join(path.dirname(file_name), unescape_str(c[1].value().replace(/^"|"$/, "")))
+			var nm = path.join(path.dirname(file_name), unescape_str(c[1].value().replace(/^"|"$/g, "")))
 			if(c[0].value()=="include") {
 				include_file(nm)
 				return ["includes[", JSON.stringify(nm), "]"].join("")
@@ -133,7 +133,7 @@ function parse_file(file_name) {
 							r.push("] || $args[")
 							r.push(nm)
 							r.push("] || ")
-							r.push(val_node(al.children[1]))
+							r.push(val_node(al[j].children[1]))
 							r.push(";\n")
 						} else {
 							var nm = val_node(al[j])
@@ -161,7 +161,7 @@ function parse_file(file_name) {
 			return r.join("")
 		} else if(nd.name=="directive" && nd.children[0].value()=="parse") {
 			var c = nd.children
-			var nm = path.join(path.dirname(file_name), unescape_str(c[1].value().replace(/^"|"$/, "")))
+			var nm = path.join(path.dirname(file_name), unescape_str(c[1].value().replace(/^"|"$/g, "")))
 			parse_file(nm)
 			return ["parsed[", JSON.stringify(nm), "]($ctx, $out);\n"].join("")
 		} else if(nd.name=="var" && nd.children && nd.children[nd.children.length-1].name=="call") {

@@ -7,9 +7,9 @@ var parser = require("./parser").generate(function(bi) {
 	with(bi) {
 		rule("spaces", /^(\s|\/\*([^\*]|\*[^\/])*\*\/)+/)
 		rule("text", named("text", /^[^;\$]+/))
-		rule("var", named("var", /^\$([a-zA-Z_][a-zA-Z_0-9]*|\{[a-zA-Z_][a-zA-Z_0-9]*\})/))
+		rule("var", named("var", /^\$([a-zA-Z_][a-zA-Z_0-9\-]*|\{[a-zA-Z_][a-zA-Z_0-9\-]*\})/))
 		rule("value", named("value", rep(or("var", "text"))))
-		rule("name", named("name", /^[a-zA-Z_][a-zA-Z_0-9\-]*/))
+		rule("name", named("name", /^[a-zA-Z_\-][a-zA-Z_0-9\-]*/))
 		rule("decl", named("decl", and("name", maybe("spaces"), /^:/, maybe("spaces"), "value", maybe("spaces"), /^;/)))
 		rule("namespace", named("namespace", and("name", maybe("spaces"), /^\[/, rep(or("spaces", "decl", "rule", "namespace", "include")), /^\]/)))
 		rule("rule_name", named("rule_name", /^[a-zA-Z_](\s*[a-zA-Z_0-9>\.#\-\*:])*/))

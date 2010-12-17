@@ -1,14 +1,16 @@
 
 
-TPL_FILES=ctl/controls.tpl
-XCSS_FILES=ctl/style.xcss
-JS_FILES=
+TPL_FILES=$(shell find ./ctl -name *.tpl)
+XCSS_FILES=$(shell find ./ctl -name *.xcss)
+JS_FILES=$(shell find ./ctl -name *.js)
+
+CLIENT_JS = $(shell find ./client -name *.js)
 
 default: update_styles update_scripts update_images
 
 update_styles: static static/styles static/styles/ctl.css
 
-update_scripts: static static/scripts static/scripts/underscore.js static/scripts/jquery.js static/scripts/jquery.history.js static/scripts/ctl.js
+update_scripts: static static/scripts static/scripts/client.js static/scripts/ctl.js static/scripts/underscore.js static/scripts/jquery.js static/scripts/jquery.history.js static/scripts/ctl_tpl.js
 
 update_images: static/img
 
@@ -27,8 +29,15 @@ static/styles/ctl.css: ${XCSS_FILES}
 static/scripts:
 	mkdir static/scripts
 
-static/scripts/ctl.js: ${TPL_FILES}
-	utils/tpl2js.js -o static/scripts/ctl.js ${TPL_FILES}
+static/scripts/client.js: ${CLIENT_JS}
+	cat ${CLIENT_JS} > static/scripts/client.js
+
+static/scripts/ctl.js: ${JS_FILES}
+	echo "var \$$ctl = {};" > static/scripts/ctl.js
+	cat ${JS_FILES} >> static/scripts/ctl.js
+
+static/scripts/ctl_tpl.js: ${TPL_FILES}
+	utils/tpl2js.js -o static/scripts/ctl_tpl.js ${TPL_FILES}
 
 static/scripts/underscore.js:
 	curl -o static/scripts/underscore.js -X GET "https://github.com/documentcloud/underscore/raw/master/underscore-min.js"

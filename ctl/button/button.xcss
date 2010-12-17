@@ -1,0 +1,6 @@
+
+button [
+	normal (round-all, bg-normal, cl-normal, border-normal) {}
+	hover(normal, bg-hover, cl-hover, border-hover) {}
+	active(normal, bg-active, cl-active, border-active) {}
+]

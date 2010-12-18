@@ -203,7 +203,7 @@ function parse_file(file_name) {
 }
 
 var out = function(s) {
-		require("sys").puts(s)
+		process.stdout.write(s)
 	}
 var fn_name = "tpl2js"
 
@@ -255,10 +255,9 @@ r.push(";\n")
 r.push("var parsed = {\n")
 var fst = true
 for(var i in parsed) {
-	if(!fst) {
+	if(!fst)
 		r.push(",\n")
-		fst = false
-	}
+	fst = false
 	r.push(JSON.stringify(i))
 	r.push(": ")
 	r.push(parsed[i])

@@ -10,4 +10,3 @@ function($ctx, $args, $out) {
 			$args.yield([arr[i], i], $out)
 	}
 }
-

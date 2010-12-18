@@ -6,7 +6,15 @@ JS_FILES=$(shell find client/ctl -name *.js)
 
 CLIENT_JS = $(shell find client/src -name *.js)
 
-default: update_styles update_scripts update_images
+default: build
+
+start: build
+	server/index.js
+
+debug: build
+	node --debug-brk server/index.js
+
+build: update_styles update_scripts update_images
 
 update_styles: static static/styles static/styles/ctl.css
 

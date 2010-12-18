@@ -1,10 +1,10 @@
 
 
-TPL_FILES=$(shell find ./ctl -name *.tpl)
-XCSS_FILES=$(shell find ./ctl -name *.xcss)
-JS_FILES=$(shell find ./ctl -name *.js)
+TPL_FILES=$(shell find client/ctl -name *.tpl)
+XCSS_FILES=$(shell find client/ctl -name *.xcss)
+JS_FILES=$(shell find client/ctl -name *.js)
 
-CLIENT_JS = $(shell find ./client -name *.js)
+CLIENT_JS = $(shell find client/src -name *.js)
 
 default: update_styles update_scripts update_images
 
@@ -17,14 +17,14 @@ update_images: static/img
 static:
 	mkdir static
 
-static/img: static img
-	cp -fr img static
+static/img: static client/img
+	cp -fr client/img static
 
 static/styles:
 	mkdir static/styles
 
 static/styles/ctl.css: ${XCSS_FILES}
-	utils/xcss.js -o static/styles/ctl.css ctl/style.xcss
+	utils/xcss.js -o static/styles/ctl.css client/ctl/style.xcss
 
 static/scripts:
 	mkdir static/scripts

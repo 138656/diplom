@@ -237,21 +237,6 @@ r.push("if($args[0] && $args[1] && $args[2]!=undefined) { $args[0][$args[1]] = $
 r.push("if($args[0] && $args[1]!=undefined) { $ctx[$args[0]] = $args[1]; return; };\n")
 r.push("};\n")
 
-r.push("$ctx['lambda'] = function($ctx, $args, $out) {\n")
-r.push("if(!$args.yield || !$args[0]) return;\n")
-r.push("var res_fn = function(ctx, args, out) { $args.yield(args, out); };\n")
-r.push("if($args[1]) { $args[0][$args[1]] = res_fn; return; };\n")
-r.push("$ctx[$args[0]] = res_fn; return;\n")
-r.push("};\n")
-
-r.push("$ctx['if'] = function($ctx, $args, $out) { if($args[0] && $args.yield) $args.yield({}, $out); };\n")
-r.push("$ctx['unless'] = function($ctx, $args, $out) { if((!$args[0]) && $args.yield) $args.yield(null, $out); };\n")
-
-r.push("$ctx['foreach'] = function($ctx, $args, $out) {\n")
-r.push("if(!$args[0] || !$args.yield) return;\n")
-r.push("var arr = $args[0];\n")
-r.push("if(arr instanceof Array) {\nfor(var i=0; i<arr.length; i++) $args.yield([arr[i], i], $out);\n}")
-r.push(" else {\nfor(var i in arr) $args.yield([arr[i], i], $out);\n} }\n")
 
 var plugins_dir = path.join(__dirname, "plugins")
 var plugins = fs.readdirSync(plugins_dir)

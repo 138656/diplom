@@ -6,16 +6,35 @@ var async = require('async')
 var fs = require('fs')
 var path = require('path')
 var urllib = require('url')
+var util = require('util')
 var _ = require('underscore')._
 
 
 
 function start_server(params) {
 	http.createServer(function (req, res) {
-		var url = urllib.parse(req.url)
-		if(url.pathname=="/" || url.pathname=="/index.html") {
+		var url = urllib.parse(req.url).pathname
+		if(url=="/" || url=="/index.html") {
 			res.writeHead(200, {'Content-Type': 'text/html'})
 			res.end(params.templates("main.tpl", { scripts: params.scripts, styles: params.styles }))
+		} else if(url.match(/^\/(js|css|img)\/[\.a-zA-Z_]+\.(js|css|jpg|jpeg|gif|png)$/)) {
+			var tp = url.match(/[a-z]+$/)[0]
+			var dir = ({
+					"js": "scripts",
+					"css": "styles",
+					"img": "img"
+				})[url.match(/\/(js|css|img)\//)[1]]
+			var nm = path.join("static", dir, url.replace(/^\/(js|css|img)\//, ""))
+			fs.stat(nm, function(err, st) {
+					if(err || !st.isFile()) {
+						res.writeHead(404, {'Content-Type': 'text/plain'})
+						res.end('File not found.')
+					} else {
+						res.writeHead(200, {'Content-Type': { js: "text/javacript", css: "text/css"}[tp]})
+						var stream = fs.createReadStream(nm)
+						util.pump(stream, res)
+					}
+				})
 		} else {
 			res.writeHead(404, {'Content-Type': 'text/plain'})
 			res.end('File not found.')

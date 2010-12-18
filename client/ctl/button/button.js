@@ -9,8 +9,7 @@ $ctl.button = function(id) {
 		var ctl = $control("caption", "@click")
 		ctl.id = id
 		nd.data("ctl", ctl)
-		clt.caption(nd.text())
-		clt.caption.change(function(v) {
+		ctl.caption(nd.text()).caption.change(function(v) {
 				nd.text(v || "")
 			})
 		function set_class(cl) {
@@ -21,19 +20,19 @@ $ctl.button = function(id) {
 			})
 		var hover = false
 		nd.hover(function() {
-				set_class("button-hover")
+				set_class("ctl-button-hover")
 				hover = true
 			}, function() {
-				set_class("button-normal")
+				set_class("ctl-button-normal")
 				hover = false
 			})
 		nd.mousedown(function(e) {
 			if(e.which==1)
-				set_class("button-active")
+				set_class("ctl-button-active")
 		})
 		nd.mouseup(function(e) {
 			if(e.which==1)
-				set_class(hover ? "button-hover" : "button-normal")
+				set_class(hover ? "ctl-button-hover" : "ctl-button-normal")
 		})
 		return ctl
 	}

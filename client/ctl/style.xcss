@@ -1,6 +1,8 @@
 
 /* Some code and idea I take from jQueryUI */
 
+img-dir: /img;
+
 color-normal: #2E6E9E;
 color-hover: ${color-normal};
 color-active: #E17009;
@@ -10,7 +12,9 @@ border-color-normal: #C5DBEC;
 border-color-hover: #79B7E7;
 border-color-active: ${border-color-hover};
 
-round-radius: 5px;
+round-radius: 4px;
+panel-padding: 6px;
+panel-padding-double: 12px;
 
 round-tl { -moz-border-radius-topleft: ${round-radius}; -webkit-border-top-left-radius: ${round-radius}; border-top-left-radius: ${round-radius}; }
 round-tr { -moz-border-radius-topright: ${round-radius}; -webkit-border-top-right-radius: ${round-radius}; border-top-right-radius: ${round-radius}; }
@@ -22,9 +26,9 @@ round-right {  -moz-border-radius-topright: ${round-radius}; -webkit-border-top-
 round-left { -moz-border-radius-topleft: ${round-radius}; -webkit-border-top-left-radius: ${round-radius}; border-top-left-radius: ${round-radius}; -moz-border-radius-bottomleft: ${round-radius}; -webkit-border-bottom-left-radius: ${round-radius}; border-bottom-left-radius: ${round-radius}; }
 round-all { -moz-border-radius: ${round-radius}; -webkit-border-radius: ${round-radius}; border-radius: ${round-radius}; }
 
-bg-normal { backgroung-image: url("img/bg_dark.png"); backgroung-position: center center; }
-bg-hover(bg-normal) { backgroung-image: url("img/bg_middle.png"); }
-bg-active(bg-normal) { backgroung-image: url("img/bg_light.png"); }
+bg-normal { background-image: url("${img-dir}/bg_dark.png"); background-position: center center; }
+bg-hover(bg-normal) { background-image: url("${img-dir}/bg_middle.png"); }
+bg-active(bg-normal) { background-image: url("${img-dir}/bg_light.png"); }
 
 cl-normal { color: ${color-normal}; }
 cl-hover { color: ${color-hover}; }
@@ -35,10 +39,14 @@ border-normal { border-width: 1px; border-color: ${border-color-normal}; border-
 border-hover (border-normal) { border-color: ${border-color-hover}; }
 border-active (border-normal) { border-color: ${border-color-active}; }
 
-font-caption { font-family: Lucida Grande, Lucida Sans, Arial, sans-serif; font-size: 12px; }
+font-caption { font-family: Lucida Grande, Lucida Sans, Arial, sans-serif; font-size: 14px; font-weight: bold; }
 font-text { font-family: Lucida Grande, Lucida Sans, Arial, sans-serif; font-size: 14px; }
-font-title { font-family: Lucida Grande, Lucida Sans, Arial, sans-serif; font-size: 16px; }
+font-title { font-family: Lucida Grande, Lucida Sans, Arial, sans-serif; font-size: 18px; }
 
+disable-selection {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+}
 
 ctl [
 	include("button/button.xcss");

@@ -7,7 +7,7 @@ var path = require("path")
 var parser = require("./parser").generate(function(bi) {
 		with(bi) {
 			var mbs = maybe("space")
-			rule("text", named("text", /^([^@#\$]+|\\[^])+/))
+			rule("text", named("text", /^([^@#\$\\]+|\\[^])+/))
 			rule("comment", /(^#\*([^\*]+|\*[^#])*\*#)|(^##.+\r?\n?)/)
 			rule("space", /^(\s|(^#\*([^\*]+|\*[^#])*\*#)|(^##.+\n?))+/)
 			rule("name", named("name", /^[a-zA-Z_][a-zA-Z_0-9]*/))
@@ -16,8 +16,8 @@ var parser = require("./parser").generate(function(bi) {
 							named("text", /^([^@#\$"]+|\\[^])+/),
 							"var", "directive", "comment"
 						)), /^"/)))
-			rule("array", named("array", and(/^\[/, mbs, join("value", "space"), mbs, /^\]/)))
-			rule("hash", named("hash", and(/^\{/, mbs, join("pair", "space"), mbs, /^\}/)))
+			rule("array", named("array", and(/^\[/, mbs, maybe(join("value", "space")), mbs, /^\]/)))
+			rule("hash", named("hash", and(/^\{/, mbs, maybe(join("pair", "space")), mbs, /^\}/)))
 			rule("text_value", or("name", "number", "var", "string", "directive"))
 			rule("value", or("name", "number", "var", "string", "directive", "array", "hash"))
 			rule("pair", named("pair", and("text_value", mbs, /^:/ , mbs, "value")))
@@ -48,7 +48,7 @@ function parse_file(file_name) {
 		return;
 	function unescape_str(str) {
 		return str.replace(/\\[^]/g, function(m) {
-				return m[0].substring(1, 2)
+				return m.substring(1, 2)
 			})
 	}
 	function get_val(nd) {
@@ -229,14 +229,6 @@ r.push("function var_index(v, i) { return v ? v[i] : null; };\n")
 r.push("function var_call(v, ctx, args, out) { if(v && typeof v=='function') v(ctx, args, out); };\n")
 
 r.push("var $ctx = context(ctx);\n")
-
-r.push("$ctx['set'] = function($ctx, $args, $out) {\n")
-r.push("if($args[0] && $args[1]!==undefined && $args.yield) { var o = []; $args.yield({}, o); $args[0][$args[1]] = o.join(''); return; };\n")
-r.push("if($args[0] && $args.yield) { var o = []; $args.yield({}, o); $ctx[$args[0]] = o.join(''); return; };\n")
-r.push("if($args[0] && $args[1] && $args[2]!=undefined) { $args[0][$args[1]] = $args[2]; return; };\n")
-r.push("if($args[0] && $args[1]!=undefined) { $ctx[$args[0]] = $args[1]; return; };\n")
-r.push("};\n")
-
 
 var plugins_dir = path.join(__dirname, "plugins")
 var plugins = fs.readdirSync(plugins_dir)

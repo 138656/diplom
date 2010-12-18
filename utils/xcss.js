@@ -99,6 +99,7 @@ function process_file(fname) {
 			rules_str = rules_str.join("")
 			for(var i=0; i<classes.length; i++) {
 				ctx[classes[i]] = rules
+				r.push(".")
 				r.push(prefix)
 				r.push(classes[i])
 				r.push(" ")

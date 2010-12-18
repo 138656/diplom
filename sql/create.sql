@@ -1,4 +1,19 @@
 
+CREATE TABLE files (
+	id SERIAL PRIMARY KEY,
+	extension VARCHAR(10),
+	content_type VARCHAR(100)
+);
+
+CREATE TABLE users_roles (
+	id INTEGER PRIMARY KEY,
+	system_name VARCHAR(12) NOT NULL,
+	name VARCHAR(30) NOT NULL
+);
+
+INSERT INTO users_roles(id, system_name, name) VALUES(1, 'admin', 'Администратор'),
+	(2, 'teacher', 'Учитель'),
+	(3, 'student', 'Ученик');
 
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
@@ -7,11 +22,19 @@ CREATE TABLE users (
 	name3 VARCHAR(100),
 	address TEXT,
 	phone VARCHAR(100),
-	photo BYTEA,
-	_login VARCHAR(100) NOT NULL,
+	photo INTEGER REFERENCES files(id),
+	email VARCHAR(100),
+	_login VARCHAR(100) UNIQUE NOT NULL,
 	_password VARCHAR(100) NOT NULL,
-	_role VARCHAR(10) NOT NULL, --ENUM('teacher', 'student')
+	_role_id INTEGER REFERENCES users_roles(id) NOT NULL,
 	_blocked BOOL DEFAULT FALSE
+);
+
+INSERT INTO users(name1, name2, _login, _password, _role) VALUES('Администратор', 'Администратор', 'admin', 'moulin', 1);
+
+CREATE TABLE user_sessions (
+	user_key VARCHAR(200) PRIMARY KEY,
+	user_id INTEGER REFERENCES users(id) NOT NULL
 );
 
 CREATE TABLE users_messages (

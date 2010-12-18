@@ -1,6 +1,10 @@
 
 button [
-	normal (round-all, bg-normal, cl-normal, border-normal, font-caption, disable-selection) { padding: ${panel-padding} ${panel-padding-double}; display: inline-block; cursor: pointer;}
+	normal (round-all, bg-normal, cl-normal, border-normal, font-caption, disable-selection) {
+		padding: ${panel-padding} ${panel-padding-double};
+		display: inline-block;
+		cursor: pointer;
+	}
 	hover(normal, bg-hover, cl-hover, border-hover) {}
 	active(normal, bg-active, cl-active, border-active) {}
 ]

@@ -9,7 +9,7 @@ var urllib = require('url')
 var util = require('util')
 var _ = require('underscore')._
 
-
+var controller = require('./src/controller').controller
 
 function start_server(params) {
 	http.createServer(function (req, res) {
@@ -35,10 +35,8 @@ function start_server(params) {
 						util.pump(stream, res)
 					}
 				})
-		} else {
-			res.writeHead(404, {'Content-Type': 'text/plain'})
-			res.end('File not found.')
-		}
+		} else
+			controller(req, res, params)
 	}).listen(9090, "127.0.0.1");
 	console.log('Server running at http://127.0.0.1:9090/');
 }

@@ -30,10 +30,14 @@ CREATE TABLE users (
 	_blocked BOOL DEFAULT FALSE
 );
 
-INSERT INTO users(name1, name2, _login, _password, _role) VALUES('Администратор', 'Администратор', 'admin', 'moulin', 1);
+CREATE INDEX users_by_role_idx ON users(_role_id);
+CREATE INDEX users_sort_idx ON users(name1, name2, id);
 
-CREATE TABLE user_sessions (
-	user_key VARCHAR(200) PRIMARY KEY,
+INSERT INTO users(name1, name2, _login, _password, _role_id) VALUES('Администратор', 'Администратор', 'admin', 'moulin', 1);
+
+CREATE TABLE users_sessions (
+	user_key VARCHAR(32) PRIMARY KEY DEFAULT md5(to_char(now(), 'HH12:MI:SS:MS') || to_char(random(),'9D9999999999')),
+	started TIMESTAMP NOT NULL DEFAULT now(),
 	user_id INTEGER REFERENCES users(id) NOT NULL
 );
 

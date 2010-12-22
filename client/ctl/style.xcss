@@ -1,7 +1,7 @@
 
 /* Some code and idea I take from jQueryUI */
 
-img-dir: /img;
+img-dir: /static/img;
 
 color-normal: #2E6E9E;
 color-hover: ${color-normal};

@@ -28,9 +28,11 @@ var parser = require("./parser").generate(function(bi) {
 				}
 			}
 			rule("index", named("index", and(/^\[/, mbs, "text_value", mbs, /^\]/)))
-			var _var = and(maybe("name"), rep(or(and(/^\./, "name"), and(mbs, "index"))), maybe(named("call", and(mbs, arg_list(/^\(/, /^\)/), maybe(and(mbs, "block"))))))
-			rule("var", named("var", or(and(/^\$\{/, _var, /^\}/), and(/^\$/, _var))))
-			rule("block", named("block", and(/^#/, maybe(and(mbs, arg_list(/^\|/, /^\|/))), rep(or("text", "comment", "var")), /^#end/)))
+			var _var = and(maybe("name"),
+				rep(or(and(/^\./, "name"), and(mbs, "index"))),
+				maybe(named("call", and(mbs, arg_list(/^\(/, /^\)/), maybe(and(mbs, "block"))))));
+			rule("var", named("var", and(/^\$\{/, _var, /^\}/)))
+			rule("block", named("block", and(maybe(arg_list(/^\|/, /^\|/)), mbs, /^#/, and(rep(or("text", "comment", "var")), /^#end/))))
 			main_rule(rep(or("text", "comment", "var", "directive")))
 		}
 	})
@@ -198,7 +200,12 @@ function parse_file(file_name) {
 		} else
 			return ["$out.push(", val_node(nd), ");\n"].join("")
 	}
-	var tree = parser(fs.readFileSync(file_name).toString("UTF-8"))
+	var tree = null
+	try {
+		tree = parser(fs.readFileSync(file_name).toString("UTF-8"))
+	} catch(e) {
+		throw new Error(file_name + e.message)
+	}
 	parsed[file_name] = "function($ctx, $out) {\n" + txt_node(tree) + "}\n"
 }
 

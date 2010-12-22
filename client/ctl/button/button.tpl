@@ -1,4 +1,4 @@
-${lambda($ctl button) # |id caption:"Button"|
-	<div class="ctl-button-normal" id="${id}">$caption</div>
-	${init_control(button $id)}
+${lambda(${ctl} button)  |id caption:"Button"| #
+	<div class="ctl-button-normal" id="${id}">${caption}</div>
+	${init_control(button ${id})}
 #end}

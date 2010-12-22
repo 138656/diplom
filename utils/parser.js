@@ -165,7 +165,7 @@ var parser_generator = function(fn) {
 				if(str) {
 					var ps = source.substring(0, source.length-str.length)
 					ps = ps.split(/$/mg)
-					throw new Error(":" + ps.length + ":" + ps[ps.length-1].length + " - syntax error")
+					throw new Error(":" + (ps.length+1).toString() + " - syntax error")
 				} else {
 					var res = []
 					var i = 0;

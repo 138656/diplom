@@ -3,20 +3,22 @@ $ctl.button = function(id) {
 	var nd = $("#" + id)
 	if(!nd)
 		throw new Error("Can't find node: " + JSON.stringify(id))
+	var caption_nd = $(".ctl-button-caption", nd)
 	if(nd.data("ctl"))
 		return nd.data("ctl")
 	else {
 		var ctl = $control("caption", "@click")
 		ctl.id = id
 		nd.data("ctl", ctl)
-		ctl.caption(nd.text()).caption.change(function(v) {
-				nd.text(v || "")
+		ctl.caption(caption_nd.text()).caption.change(function(v) {
+				caption_nd.text(v || "")
+				caption_nd.css("display", v ? "inline-block" : "none")
 			})
 		function set_class(cl) {
 			nd.removeClass().addClass(cl)
 		}
 		nd.click(function() {
-				ctl.click(ctl)
+				ctl.click.dispatch(ctl)
 			})
 		var hover = false
 		nd.hover(function() {

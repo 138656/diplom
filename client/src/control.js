@@ -8,7 +8,15 @@ var $control = (function() {
 				var v = arguments[0]
 				if(v!=value) {
 					value = v
-					_.each(listeners, function(l) { l(value); })
+					try {					
+						_.each(listeners, function(l) { l(value); })
+					} catch(e) {
+						try {
+							if(console)
+								console.log(e)
+						} catch(e2) {}
+						throw e
+					}
 				}
 				return obj
 			} else
@@ -33,11 +41,19 @@ var $control = (function() {
 			return obj
 		}
 		res.dispatch = function() {
-			var args = arguments
-			_.each(listeners, function(l) {
-					l.apply(null, args)
-				})
-			return obj
+			try {
+				var args = arguments
+				_.each(listeners, function(l) {
+						l.apply(null, args)
+					})
+				return obj
+			} catch(e) {
+				try {
+					if(console)
+						console.log(e)
+				} catch(e2) {}
+				throw e
+			}
 		}
 		return res
 	}

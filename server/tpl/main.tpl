@@ -8,10 +8,15 @@
 	</head>
 	<body>
 		<script type="text/javascript">
-			\$("body").html(tpl2js("client/ctl/controls.tpl", {
-					ctl_name: "button",
-					ctl_params: { "id": "tst_1", "caption": "Войти" }
-				}))
+			\$(function() {
+				\$("body").html(tpl2js("client/ctl/controls.tpl", {
+						ctl_name: "button",
+						ctl_params: { "id": "tst_1", "caption": "Войти" }
+					}));
+				\$ctl.button("tst_1").click(function() {
+					\$ctl.button("tst_1").caption("Выйти");
+				})
+			})
 		</script>
 	</body>
 </html>

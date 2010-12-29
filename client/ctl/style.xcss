@@ -28,7 +28,7 @@ round-all { -moz-border-radius: ${round-radius}; -webkit-border-radius: ${round-
 
 bg-normal { background-image: url("${img-dir}/bg_dark.png"); background-position: center center; }
 bg-hover(bg-normal) { background-image: url("${img-dir}/bg_middle.png"); }
-bg-active(bg-normal) { background-image: url("${img-dir}/bg_light.png"); }
+bg-active(bg-normal) { background-image: url("${img-dir}/bg_ligth.png"); }
 
 cl-normal { color: ${color-normal}; }
 cl-hover { color: ${color-hover}; }

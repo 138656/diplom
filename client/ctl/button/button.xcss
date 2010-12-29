@@ -1,10 +1,14 @@
 
 button [
 	normal (round-all, bg-normal, cl-normal, border-normal, font-caption, disable-selection) {
-		padding: ${panel-padding} ${panel-padding-double};
+		padding: ${panel-padding};
 		display: inline-block;
 		cursor: pointer;
 	}
 	hover(normal, bg-hover, cl-hover, border-hover) {}
 	active(normal, bg-active, cl-active, border-active) {}
+	caption {
+		display: inline-block;
+		padding: 0 ${panel-padding};
+	}
 ]

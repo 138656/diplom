@@ -1,13 +1,32 @@
 
-var model = require('./model').model
 var formidable = require('formidable')
 var cookie = require('cookie')
 var urllib = require('url')
 var _ = require('underscore')._;
 
-cookie.secret = "secret"
+var ctl_list = ["login", "root", "static"]
+var ctl = _(ctl_list).reduce(function(r, v){
+		r[v] = require("./controller/" + v).action
+		return r
+	}, {})
 
-exports.controller = function(req, res, params) {
+var model = require("./model")
+
+exports.controller = function(req, res) {
+	var ctl_name = urllib.parse(req.url).pathname
+	if(ctl_name=="/" || !ctl_name)
+		ctl_name = "root"
+	else
+		ctl_name = ctl_name.split("/")[1]
+	if(_(ctl_list).any(function(x) { return x==ctl_name; })) {
+		ctl[ctl_name](req, res, model)
+	} else {
+		res.writeHead(404, {"Content-Type": "text/plain"})
+		res.end("Resource not found.")
+	}
+}
+
+/*function(req, res) {
 	var dao = null
 	function error(msg) {
 		res.writeHead(200, {"Content-Type": "application/json; charset=UTF-8"})
@@ -57,6 +76,20 @@ exports.controller = function(req, res, params) {
 					res.clearCookie("session")
 					success(err ? err.message : "Сессия удалена.")
 				})
+		} else if(match("users", "get", "current")) {
+			dao.users_get_current(function(err, res) {
+					if(err)
+						error(err.message)
+					else
+						success(res)
+				})
+		} else if(match("users", "get", /^\d+$/)) {
+			dao.users_get(path[2], function(err, v) {
+					if(err)
+						error(err.message)
+					else
+						success(v)
+				})
 		} else {
 			res.writeHead(404, {"Content-Type": "text/plain"})
 			res.end("Resource /" + path.join("/") + " not found.")
@@ -101,12 +134,12 @@ exports.controller = function(req, res, params) {
 					res.clearCookie("session")
 				} else {
 					session.at = new Date().getTime()
-					res.setSequreCookie("session", session)
+					res.setSequreCookie("session", JSON.stringify(session))
 				}
 			}
-			to_dao(session ? session.id : "")
+			to_dao(session ? JSON.parse(session).id : "")
 		} else
 			to_dao(null)
 	})();
 	
-}
+}*/

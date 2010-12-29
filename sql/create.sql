@@ -2,12 +2,12 @@
 CREATE TABLE files (
 	id SERIAL PRIMARY KEY,
 	extension VARCHAR(10),
-	content_type VARCHAR(100)
+	content_type VARCHAR(100),
+	content_length INTEGER
 );
 
-CREATE TABLE users_roles (
-	id INTEGER PRIMARY KEY,
-	system_name VARCHAR(12) NOT NULL,
+CREATE TABLE users_roles {
+	system_name VARCHAR(10) PRIMARY KEY,
 	name VARCHAR(30) NOT NULL
 );
 
@@ -26,7 +26,7 @@ CREATE TABLE users (
 	email VARCHAR(100),
 	_login VARCHAR(100) UNIQUE NOT NULL,
 	_password VARCHAR(100) NOT NULL,
-	_role_id INTEGER REFERENCES users_roles(id) NOT NULL,
+	_role_id VARCHAR(10) REFERENCES users_roles(system_name) NOT NULL,
 	_blocked BOOL DEFAULT FALSE
 );
 

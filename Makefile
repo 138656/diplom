@@ -5,6 +5,7 @@ XCSS_FILES=$(shell find client/ctl -name *.xcss)
 JS_FILES=$(shell find client/ctl -name *.js)
 
 CLIENT_JS = $(shell find client/src -name *.js)
+CLIENT_LIBS = $(shell find client/lib -name *.js)
 SERVER_TPL = $(shell find server/tpl -name *.tpl)
 
 default: build
@@ -21,7 +22,7 @@ server_templates: server/build server/build/templates.js server/build/client_tem
 
 update_styles: static static/css static/css/ctl.css
 
-update_scripts: static static/js static/js/client.js static/js/ctl.js static/js/underscore.js static/js/jquery.js static/js/jquery.history.js static/js/ctl_tpl.js
+update_scripts: static static/js static/js/client.js static/js/ctl.js static/js/ctl_tpl.js static/js/client_lib.js
 
 update_images: static/img
 
@@ -54,6 +55,9 @@ static/js:
 static/js/client.js: ${CLIENT_JS}
 	cat ${CLIENT_JS} > static/js/client.js
 
+static/js/client_lib.js: ${CLIENT_LIBS}
+	cat ${CLIENT_LIBS} > static/js/client_lib.js
+
 static/js/ctl.js: ${JS_FILES}
 	echo "var \$$ctl = {};" > static/js/ctl.js
 	cat ${JS_FILES} >> static/js/ctl.js
@@ -61,12 +65,12 @@ static/js/ctl.js: ${JS_FILES}
 static/js/ctl_tpl.js: ${TPL_FILES}
 	utils/tpl2js.js -o static/js/ctl_tpl.js ${TPL_FILES}
 
-static/js/underscore.js:
-	curl -o static/js/underscore.js -X GET "https://github.com/documentcloud/underscore/raw/master/underscore-min.js"
+client/lib:
+	mkdir client/lib
+	curl -o client/lib/underscore.js -X GET "https://github.com/documentcloud/underscore/raw/master/underscore-min.js"
+	curl -o client/lib/jquery.js -X GET "https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"
+	curl -o client/lib/jquery.history.js -X GET "https://github.com/tkyk/jquery-history-plugin/raw/master/jquery.history.js"
+	curl -o client/lib/jquery.history.js -X GET "http://plugins.jquery.com/files/jLog.min.js.txt"
+	curl -o client/lib/jquery.log.js -X GET "http://plugins.jquery.com/files/jLog.min.js.txt"
 
-static/js/jquery.js:
-	curl -o static/js/jquery.js -X GET "https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"
-
-static/js/jquery.history.js:
-	curl -o static/js/jquery.history.js -X GET https://github.com/tkyk/jquery-history-plugin/raw/master/jquery.history.js
 

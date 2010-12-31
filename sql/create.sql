@@ -1,6 +1,8 @@
 
+CREATE SEQUENCE files_id_seq;
+
 CREATE TABLE files (
-	id SERIAL PRIMARY KEY,
+	id INTEGER PRIMARY KEY,
 	extension VARCHAR(10),
 	content_type VARCHAR(100),
 	content_length INTEGER
@@ -11,9 +13,10 @@ CREATE TABLE users_roles {
 	name VARCHAR(30) NOT NULL
 );
 
-INSERT INTO users_roles(id, system_name, name) VALUES(1, 'admin', 'Администратор'),
-	(2, 'teacher', 'Учитель'),
-	(3, 'student', 'Ученик');
+INSERT INTO users_roles(system_name, name) VALUES('admin', 'Администратор'),
+	('teacher', 'Учитель'),
+	('student', 'Ученик'),
+	('parent', 'Родитель');
 
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
@@ -23,20 +26,19 @@ CREATE TABLE users (
 	address TEXT,
 	phone VARCHAR(100),
 	photo INTEGER REFERENCES files(id),
-	email VARCHAR(100),
 	_login VARCHAR(100) UNIQUE NOT NULL,
 	_password VARCHAR(100) NOT NULL,
 	_role_id VARCHAR(10) REFERENCES users_roles(system_name) NOT NULL,
-	_blocked BOOL DEFAULT FALSE
+	_blocked BOOL NOT NULL DEFAULT FALSE
 );
 
 CREATE INDEX users_by_role_idx ON users(_role_id);
 CREATE INDEX users_sort_idx ON users(name1, name2, id);
 
-INSERT INTO users(name1, name2, _login, _password, _role_id) VALUES('Администратор', 'Администратор', 'admin', 'moulin', 1);
+INSERT INTO users(name1, name2, _login, _password, _role_id) VALUES('Администратор', 'Администратор', 'admin', 'moulin', 'admin');
 
 CREATE TABLE users_sessions (
-	user_key VARCHAR(32) PRIMARY KEY DEFAULT md5(to_char(now(), 'HH12:MI:SS:MS') || to_char(random(),'9D9999999999')),
+	id VARCHAR(32) PRIMARY KEY DEFAULT md5(to_char(now(), 'HH12:MI:SS:MS') || to_char(random(),'9D9999999999')),
 	started TIMESTAMP NOT NULL DEFAULT now(),
 	user_id INTEGER REFERENCES users(id) NOT NULL
 );

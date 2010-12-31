@@ -1,0 +1,4 @@
+{
+	"db_connection_string": "pg://diplom_user:diplom@localhost:5432/diplom",
+	"cookie_secret": "secret"
+}

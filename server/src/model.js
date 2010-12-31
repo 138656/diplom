@@ -1,6 +1,51 @@
 
-var pg = require('pg')
+var pg = require("pg")
 var _ = require('underscore')._;
+var fs = require('fs')
+var path = require('path')
+var config = JSON.parse(fs.readFileSync("config.json").toString("UTF-8"))
+
+var plugins_list = ["login"]
+var plugins = _(plugins_list).reduce(function(r, v) {
+		r[v] = require("./model/" + v).init
+		return r
+	}, {})
+
+var db = {
+	connect: function(cb) {
+		pg.connect(config.db_connection_string, cb)
+	},
+	query: function(/*query, [data], callback*/) {
+		var args = arguments
+		db.connect(function(err, client) {
+				if(err)
+					args[args.length-1](err, null)
+				else
+					client.query.apply(client, args)
+			})
+	}
+}
+
+exports.model = function() {
+	var res = {
+		config: config,
+		db: db
+	}
+	_(plugins_list).each(function(p) {
+			var plugin = null
+			res[p] = function() {
+				if(!plugin)
+					plugin = plugins[p](res)
+				return plugin
+			}
+		})
+	return res
+}
+
+
+/*function pg() {
+	var pg = require('pg')
+}
 
 function connect(cb) {
 	pg.connect("pg://diplom_user:diplom@localhost:5432/diplom", cb)
@@ -105,7 +150,7 @@ exports.model = function(session, cb) {
 			return false
 	}
 	var dao = {
-		login: function(l, p, cb/*(err, session_id)*/) {
+		login: function(l, p, cb) { //(err, session_id)) {
 			connect(function(err, client) {
 				if(err)
 					cb(err, null)
@@ -185,4 +230,4 @@ exports.model = function(session, cb) {
 		})
 	} else
 		cb(null, dao)
-}
+}*/

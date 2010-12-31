@@ -1,12 +1,12 @@
 
 var urllib = require('url')
 var formidable = require('formidable')
+var _ = require('underscore')._;
 
-exports = {
+_.extend(exports, {
 	/**
 	 * req - HTTP request
-	 * cb - fn(err, data);
-	 * data = {path: [], fields: {}, files: []}
+	 * cb - fn(err, path: [], fields: {}, files: []);
 	 */
 	parse_request: function(req, cb) {
 		var parsed_url = urllib.parse(req.url, true)
@@ -21,6 +21,17 @@ exports = {
 				})
 		} else
 			cb(null, path, parsed_url.query || {}, [])
+	},
+	error: function(res, msg) {
+		res.writeHead(200, {"Content-Type": "application/json"})
+		if(typeof msg == "string")
+			res.end(JSON.stringify({ status: false, "message": msg }))
+		else
+			res.end(JSON.stringify({ status: false, "message": msg.message, "stack":msg.stack ? msg.stack.split("\n") : null }))
+	},
+	success: function(res, data) {
+		res.writeHead(200, {"Content-Type": "application/json" })
+		res.end(JSON.stringify({ status: true, "data": data }))
 	}
-}
+})
 

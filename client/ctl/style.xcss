@@ -15,6 +15,7 @@ border-color-active: ${border-color-hover};
 round-radius: 3px;
 panel-padding: 6px;
 panel-padding-double: 12px;
+panel-padding-half: 3px;
 
 round-tl { -moz-border-radius-topleft: ${round-radius}; -webkit-border-top-left-radius: ${round-radius}; border-top-left-radius: ${round-radius}; }
 round-tr { -moz-border-radius-topright: ${round-radius}; -webkit-border-top-right-radius: ${round-radius}; border-top-right-radius: ${round-radius}; }
@@ -26,8 +27,8 @@ round-right {  -moz-border-radius-topright: ${round-radius}; -webkit-border-top-
 round-left { -moz-border-radius-topleft: ${round-radius}; -webkit-border-top-left-radius: ${round-radius}; border-top-left-radius: ${round-radius}; -moz-border-radius-bottomleft: ${round-radius}; -webkit-border-bottom-left-radius: ${round-radius}; border-bottom-left-radius: ${round-radius}; }
 round-all { -moz-border-radius: ${round-radius}; -webkit-border-radius: ${round-radius}; border-radius: ${round-radius}; }
 
-bg-normal { background-image: url("${img-dir}/bg_dark.png"); background-position: center center; }
-bg-hover(bg-normal) { background-image: url("${img-dir}/bg_middle.png"); }
+bg-normal { background-image: url("${img-dir}/bg_middle.png"); background-position: center center; }
+bg-hover(bg-normal) { background-image: url("${img-dir}/bg_dark.png"); }
 bg-active(bg-normal) { background-image: url("${img-dir}/bg_ligth.png"); }
 
 cl-normal { color: ${color-normal}; }
@@ -50,6 +51,7 @@ disable-selection {
 
 ctl [
 	include("button/button.xcss");
+	include("pagelist/pagelist.xcss");
 ]
 
 

@@ -21,21 +21,7 @@ $ctl.button = function(id) {
 				ctl.click.dispatch(ctl)
 			})
 		var hover = false
-		nd.hover(function() {
-				set_class("ctl-button-hover")
-				hover = true
-			}, function() {
-				set_class("ctl-button-normal")
-				hover = false
-			})
-		nd.mousedown(function(e) {
-			if(e.which==1)
-				set_class("ctl-button-active")
-		})
-		nd.mouseup(function(e) {
-			if(e.which==1)
-				set_class(hover ? "ctl-button-hover" : "ctl-button-normal")
-		})
+		nd.active("ctl-button-normal", "ctl-button-hover", "ctl-button-active")
 		return ctl
 	}
 }

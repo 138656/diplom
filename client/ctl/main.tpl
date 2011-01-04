@@ -10,12 +10,17 @@
 		<script type="text/javascript">
 			\$(function() {
 				\$("body").html(tpl2js("client/ctl/controls.tpl", {
-						ctl_name: "button",
-						ctl_params: { "id": "tst_1", "caption": "Войти" }
+						ctl_name: "pagelist",
+						ctl_params: { "id": "tst_1", "pages": [
+							{page: 0, text: "1", active: false},
+							{page: 1, text: "2", active: false},
+							{page: 2, text: "3", active: true},
+							{page: 3, text: "4", active: false},
+							{page: 4, text: ">", active: false}] }
 					}));
-				\$ctl.button("tst_1").click(function() {
+				#*\$ctl.button("tst_1").click(function() {
 					\$ctl.button("tst_1").caption("Выйти");
-				})
+				})*#
 			})
 		</script>
 	</body>

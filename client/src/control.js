@@ -57,7 +57,6 @@ var $control = (function() {
 		}
 		return res
 	}
-	
 	return function() {
 		return _.reduce(arguments, function(r, v) {
 				if(v.substr(0, 1)=="@")
@@ -67,7 +66,7 @@ var $control = (function() {
 				return r
 			}, {})
 	}
-})()
+})();
 
 
 

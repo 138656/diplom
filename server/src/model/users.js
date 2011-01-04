@@ -22,7 +22,7 @@ exports.init = function(model) {
 			if(params.text)
 				cnd.push("_fts @@ plainto_tsquery('pg_catalog.russian', " + val(params.text) + ")")
 			if(params.role)
-				cnd.push("_role=" + val(params.role))
+				cnd.push("_role_id=" + val(params.role))
 			if(params.id) {
 				if(params.id instanceof Array)
 					cnd.push("id IN (" + _(params.id).map(val).join(", ") + ")")

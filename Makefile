@@ -6,7 +6,6 @@ JS_FILES=$(shell find client/ctl -name *.js)
 
 CLIENT_JS = $(shell find client/src -name *.js)
 CLIENT_LIBS = $(shell find client/lib -name *.js)
-SERVER_TPL = $(shell find server/tpl -name *.tpl)
 
 default: build
 
@@ -18,7 +17,7 @@ debug: build
 
 build: update_styles update_scripts update_images server_templates
 
-server_templates: server/build server/build/templates.js server/build/client_templates.js
+server_templates: server/build server/build/templates.js
 
 update_styles: static static/css static/css/ctl.css
 
@@ -32,13 +31,10 @@ static:
 server/build:
 	mkdir server/build
 
-server/build/client_templates.js: static/js/ctl_tpl.js
-	cp -f static/js/ctl_tpl.js server/build/client_templates.js
-	echo "exports.tpl = tpl2js;" >> server/build/client_templates.js
-
-server/build/templates.js: ${SERVER_TPL}
-	utils/tpl2js.js -o server/build/templates.js ${SERVER_TPL}
-	echo "exports.tpl = function(fname, ctx) { return tpl2js(require('path').join('server', 'tpl', fname), ctx); };\n"  >> server/build/templates.js
+server/build/templates.js: static/js/ctl_tpl.js
+	cp -f static/js/ctl_tpl.js server/build/templates.js
+	echo "var path = require('path');\nexports.tpl = function(fname, ctx) { return tpl2js(path.join('client', 'ctl', fname), ctx); };\n"  >> server/build/templates.js
+	
 
 static/img: static client/img
 	cp -fr client/img static

@@ -12,7 +12,7 @@ border-color-normal: #C5DBEC;
 border-color-hover: #79B7E7;
 border-color-active: ${border-color-hover};
 
-round-radius: 4px;
+round-radius: 3px;
 panel-padding: 6px;
 panel-padding-double: 12px;
 

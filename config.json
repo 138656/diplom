@@ -1,4 +1,16 @@
 {
 	"db_connection_string": "pg://diplom_user:diplom@localhost:5432/diplom",
-	"cookie_secret": "secret"
+	"cookie_secret": "secret",
+	"panels": {
+		"anonimous": [],
+		"admin": ["profile"],
+		"teacher": ["profile"],
+		"student": ["profile"]
+	},
+	"rights": {
+		"anonimous": [],
+		"admin": [],
+		"teacher": [],
+		"parent": []
+	}
 }

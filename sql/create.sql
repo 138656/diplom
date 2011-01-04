@@ -8,7 +8,7 @@ CREATE TABLE files (
 	content_length INTEGER
 );
 
-CREATE TABLE users_roles {
+CREATE TABLE users_roles (
 	system_name VARCHAR(10) PRIMARY KEY,
 	name VARCHAR(30) NOT NULL
 );
@@ -29,11 +29,18 @@ CREATE TABLE users (
 	_login VARCHAR(100) UNIQUE NOT NULL,
 	_password VARCHAR(100) NOT NULL,
 	_role_id VARCHAR(10) REFERENCES users_roles(system_name) NOT NULL,
-	_blocked BOOL NOT NULL DEFAULT FALSE
+	_blocked BOOL NOT NULL DEFAULT FALSE,
+	_fts tsvector
 );
+
+CREATE TRIGGER users_ftstg BEFORE INSERT OR UPDATE
+ON users FOR EACH ROW EXECUTE PROCEDURE
+	tsvector_update_trigger(_fts, 'pg_catalog.russian', name1, name2, name3, phone, _role_id);
+CREATE INDEX users_ftsidx ON users USING gin(_fts);
 
 CREATE INDEX users_by_role_idx ON users(_role_id);
 CREATE INDEX users_sort_idx ON users(name1, name2, id);
+
 
 INSERT INTO users(name1, name2, _login, _password, _role_id) VALUES('Администратор', 'Администратор', 'admin', 'moulin', 'admin');
 

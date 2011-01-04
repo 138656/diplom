@@ -32,8 +32,7 @@ exports.init = function(model) {
 					session_id = sess_id
 					current_user = r.rows[0]
 					cb(null, current_user)
-				}
-					
+				}	
 			})
 		},
 		current_user: function() {

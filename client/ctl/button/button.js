@@ -3,10 +3,10 @@ $ctl.button = function(id) {
 	var nd = $("#" + id)
 	if(!nd)
 		throw new Error("Can't find node: " + JSON.stringify(id))
-	var caption_nd = $(".ctl-button-caption", nd)
 	if(nd.data("ctl"))
 		return nd.data("ctl")
 	else {
+		var caption_nd = $(".ctl-button-caption", nd)
 		var ctl = $control("caption", "@click")
 		ctl.id = id
 		nd.data("ctl", ctl)

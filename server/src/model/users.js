@@ -4,7 +4,7 @@ var _ = require("underscore")._;
 
 var views = {
 		"full": ["id", "name1", "name2", "name3", "address", "phone", "NOT(photo IS NULL) as has_photo", "_login", "_role_id", "_blocked"],
-		"short": ["id", "name1", "name2", "name3", "NOT(photo IS NULL) as has_photo", "_role_id"],
+		"short": ["id", "name1", "name2", "name3", "NOT(photo IS NULL) as has_photo", "(SELECT name FROM users_roles WHERE system_name=users._role_id) as role"],
 		"combo": ["id", "(name1 || ' ' || name2 || COALESCE(' ' || name3, '')) as name"]
 	}
 
@@ -96,6 +96,15 @@ exports.init = function(model) {
 				else
 					_.defer(function() { cb(null); })
 			}
+		},
+		set_photo: function(id, photo) {
+		
+		},
+		remove_photo: function(id) {
+		
+		},
+		get_photo: function(id) {
+		
 		}
 	}
 	return res_md

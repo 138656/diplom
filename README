@@ -6,5 +6,6 @@ async              https://github.com/caolan/async/
 underscore         https://github.com/documentcloud/underscore/
 node-formidable    https://github.com/felixge/node-formidable/
 cookie-node        https://github.com/jed/cookie-node
+node-imagemagick   https://github.com/rsms/node-imagemagick
 
 Some styles and images I take from jQueryUI

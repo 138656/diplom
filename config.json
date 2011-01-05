@@ -1,16 +1,16 @@
 {
 	"db_connection_string": "pg://diplom_user:diplom@localhost:5432/diplom",
 	"cookie_secret": "secret",
-	"panels": {
-		"anonimous": [],
+	"files_path": "data/files",
+	"images": { "cache_path": "data/img_cache",
+		"max_width": 4000,
+		"max_height": 4000 },
+	"panels": { "anonimous": [],
 		"admin": ["profile"],
 		"teacher": ["profile"],
-		"student": ["profile"]
-	},
-	"rights": {
-		"anonimous": [],
+		"student": ["profile"] },
+	"rights": { "anonimous": [],
 		"admin": [],
 		"teacher": [],
-		"parent": []
-	}
+		"parent": [] }
 }

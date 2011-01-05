@@ -3,7 +3,6 @@ CREATE SEQUENCE files_id_seq;
 
 CREATE TABLE files (
 	id INTEGER PRIMARY KEY,
-	extension VARCHAR(10),
 	content_type VARCHAR(100),
 	content_length INTEGER
 );

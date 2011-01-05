@@ -3,6 +3,7 @@ var async = require("async");
 var fs = require("fs");
 var _ = require("underscore")._;
 var path = require("path");
+var crypto = require('crypto');
 
 function pmkdir(p, cb) {
 	p = path.normalize(p).split("/")
@@ -22,7 +23,7 @@ function pmkdir(p, cb) {
 exports.storage = function(store_path) {
 	var levels = arguments.length>1 ? arguments[0] : 3
 	function id_to_path(id) {
-		var idp = _(id.toString().split("")).select(function(v, i) { return i<levels; })
+		var idp = _(crypto.createHash('md5').update(id).digest("hex").split("")).select(function(v, i) { return i<levels; })
 		while(idp.length<levels)
 			idp.unshift("_")
 		idp.unshift(store_path)

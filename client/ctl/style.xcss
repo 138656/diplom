@@ -6,7 +6,8 @@ img-dir: /static/img;
 color-normal: #2E6E9E;
 color-hover: ${color-normal};
 color-active: #E17009;
-color-text: #222222;
+color-text: #0E2130;
+color-title: #F0FBFF;
 
 border-color-normal: #C5DBEC;
 border-color-hover: #79B7E7;
@@ -35,6 +36,7 @@ cl-normal { color: ${color-normal}; }
 cl-hover { color: ${color-hover}; }
 cl-active { color: ${color-active}; }
 cl-text { color: ${color-text}; }
+cl-title { color: ${color-title}; }
 
 border-normal { border-width: 1px; border-color: ${border-color-normal}; border-style: solid; }
 border-hover (border-normal) { border-color: ${border-color-hover}; }
@@ -42,16 +44,19 @@ border-active (border-normal) { border-color: ${border-color-active}; }
 
 font-caption { font-family: Lucida Grande, Lucida Sans, Arial, sans-serif; font-size: 14px; font-weight: bold; }
 font-text { font-family: Lucida Grande, Lucida Sans, Arial, sans-serif; font-size: 14px; }
-font-title { font-family: Lucida Grande, Lucida Sans, Arial, sans-serif; font-size: 18px; }
+font-title { font-family: Lucida Grande, Lucida Sans, Arial, sans-serif; font-size: 18px; font-weight: bold; }
 
 disable-selection {
 	-moz-user-select: none;
 	-webkit-user-select: none;
 }
 
+include("main.xcss");
+
 ctl [
 	include("button/button.xcss");
 	include("pagelist/pagelist.xcss");
+	include("util/util.xcss");
 ]
 
 

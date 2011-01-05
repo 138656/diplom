@@ -1,12 +1,29 @@
 
 button [
 	normal (round-all, bg-normal, cl-normal, border-normal, font-caption, disable-selection) {
-		padding: ${panel-padding};
+		/*padding: ${panel-padding};*/
+		padding: ${panel-padding-half};
 		display: inline-block;
 		cursor: pointer;
+		text-decoration: none;
 	}
 	hover(normal, bg-hover, cl-hover, border-hover) {}
 	active(normal, bg-active, cl-active, border-active) {}
+	caption {
+		display: inline-block;
+		padding: 0 ${panel-padding};
+	}
+]
+
+link [
+	normal (round-all, cl-normal, font-caption, disable-selection) {
+		padding: ${panel-padding};
+		display: block;
+		cursor: pointer;
+		text-decoration: none;
+	}
+	hover(normal, bg-hover, cl-hover) {}
+	active(normal, bg-active, cl-active) {}
 	caption {
 		display: inline-block;
 		padding: 0 ${panel-padding};

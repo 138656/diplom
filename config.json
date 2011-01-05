@@ -1,5 +1,6 @@
 {
 	"db_connection_string": "pg://diplom_user:diplom@localhost:5432/diplom",
+	"db_pull_size": 5,
 	"cookie_secret": "secret",
 	"files_path": "data/files",
 	"images": { "cache_path": "data/img_cache",

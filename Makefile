@@ -66,7 +66,6 @@ client/lib:
 	curl -o client/lib/underscore.js -X GET "https://github.com/documentcloud/underscore/raw/master/underscore-min.js"
 	curl -o client/lib/jquery.js -X GET "https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"
 	curl -o client/lib/jquery.history.js -X GET "https://github.com/tkyk/jquery-history-plugin/raw/master/jquery.history.js"
-	curl -o client/lib/jquery.history.js -X GET "http://plugins.jquery.com/files/jLog.min.js.txt"
 	curl -o client/lib/jquery.log.js -X GET "http://plugins.jquery.com/files/jLog.min.js.txt"
 
 

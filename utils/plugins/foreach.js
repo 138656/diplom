@@ -4,9 +4,9 @@ function($ctx, $args, $out) {
 	var arr = $args[0]
 	if(arr instanceof Array) {
 		for(var i=0; i<arr.length; i++)
-			$args.yield([arr[i], i], $out)
+			$args.yield($ctx, [arr[i], i], $out)
 	} else {
 		for(var i in arr)
-			$args.yield([arr[i], i], $out)
+			$args.yield($ctx, [arr[i], i], $out)
 	}
 }

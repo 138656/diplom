@@ -1,28 +1,6 @@
-
 $ctl.button = function(id) {
 	var nd = $("#" + id)
-	if(!nd)
-		throw new Error("Can't find node: " + JSON.stringify(id))
-	if(nd.data("ctl"))
-		return nd.data("ctl")
-	else {
-		var caption_nd = $(".ctl-button-caption", nd)
-		var ctl = $control("caption", "@click")
-		ctl.id = id
-		nd.data("ctl", ctl)
-		ctl.caption(caption_nd.text()).caption.change(function(v) {
-				caption_nd.text(v || "")
-				caption_nd.css("display", v ? "inline-block" : "none")
-			})
-		function set_class(cl) {
-			nd.removeClass().addClass(cl)
-		}
-		nd.click(function() {
-				ctl.click.dispatch(ctl)
-			})
-		var hover = false
-		nd.active("ctl-button-normal", "ctl-button-hover", "ctl-button-active")
-		return ctl
-	}
-}
+	var mode = nd.hasClass("ctl-button-normal") ? "button" : "link";
+	nd.active("ctl-" + mode + "-normal", "ctl-" + mode + "-hover", "ctl-" + mode + "-active")
+};
 

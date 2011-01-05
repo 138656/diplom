@@ -13,7 +13,7 @@ var parser = require("./parser").generate(function(bi) {
 			rule("name", named("name", /^[a-zA-Z_][a-zA-Z_0-9]*/))
 			rule("number", named("number", /^\d+/))
 			rule("string", named("string", and(/^"/, rep(or(
-							named("text", /^([^@#\$"]+|\\[^])+/),
+							named("text", /^([^@#\$"\\]+|\\[^])+/),
 							"var", "directive", "comment"
 						)), /^"/)))
 			rule("array", named("array", and(/^\[/, mbs, maybe(join("value", "space")), mbs, /^\]/)))
@@ -121,7 +121,7 @@ function parse_file(file_name) {
 				throw new Error("Unknown directive: " + JSON.stringify())
 		} else if(nd.name=="block") {
 			var c = nd.children || []
-			var r = ["(function(ctx) {\nreturn function($args, $out) {\n$ctx = context(ctx);\n"]
+			var r = ["(function(ctx) {\nreturn function($unused, $args, $out) {\n$ctx = context(ctx);\n"]
 			for(var i=0; i<c.length; i++) {
 				if(c[i].name=="args") {
 					var al = c[i].children || []

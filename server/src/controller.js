@@ -13,16 +13,14 @@ var ctl = _(ctl_list).reduce(function(r, v){
 var model = require("./model").model
 
 exports.controller = function(req, res) {
+	var md = model()
 	var ctl_name = urllib.parse(req.url).pathname
 	if(ctl_name=="/" || !ctl_name)
 		ctl_name = "root"
 	else
 		ctl_name = ctl_name.split("/")[1]
 	function action() { ctl[ctl_name](req, res, md); }
-	if(ctl_name=="root")
-		action()
-	else if(_(ctl_list).any(function(x) { return x==ctl_name; })) {
-		var md = model()
+	if(_(ctl_list).any(function(x) { return x==ctl_name; })) {
 		cookie.secret = md.config.cookie_secret
 		var session = null
 		try {

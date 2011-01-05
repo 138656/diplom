@@ -1,0 +1,16 @@
+title(border-active, round-all, font-title, cl-title) {
+	background-image: url("${img-dir}/wave.png");
+	background-position: center center;
+	overflow: hidden;
+	padding: ${panel-padding-double};
+}
+
+string [
+	normal(round-all, font-text, cl-text, border-normal) {
+		padding: ${panel-padding-half};
+		margin: 0;
+		width: 200px;
+	}
+	hover(normal, border-hover) {}
+	active(normal, border-active) {}
+]

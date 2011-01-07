@@ -121,7 +121,7 @@ function parse_file(file_name) {
 				throw new Error("Unknown directive: " + JSON.stringify())
 		} else if(nd.name=="block") {
 			var c = nd.children || []
-			var r = ["(function(ctx) {\nreturn function($unused, $args, $out) {\n$ctx = context(ctx);\n"]
+			var r = ["(function(ctx) {\nreturn function($unused, $args, $out) {\nvar $ctx = context(ctx);\n"]
 			for(var i=0; i<c.length; i++) {
 				if(c[i].name=="args") {
 					var al = c[i].children || []

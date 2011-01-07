@@ -70,7 +70,8 @@ exports.init = function(model) {
 				teachers: "Учителя",
 				group: "Однокласники",
 				students: "Ученики",
-				messages: "Сообщения"
+				messages: "Сообщения",
+				catalog: "Каталог ресурсов"
 			}
 			function get_al() {
 				return _(arguments).map(function(a) {
@@ -79,13 +80,13 @@ exports.init = function(model) {
 			}
 			if(current_user) {
 				if(current_user._role_id=="admin")
-					return get_al("main", "users", "messages")
+					return get_al("main", "users", "messages", "catalog")
 				if(current_user._role_id=="teacher")
-					return get_al("main", "teachers", "students", "messages")
+					return get_al("main", "teachers", "students", "messages", "catalog")
 				if(current_user._role_id=="student")
-					return get_al("main", "teachers", "students", "messages")
+					return get_al("main", "teachers", "group", "messages", "catalog")
 			}
-			return get_al("main")
+			return get_al("main", "catalog")
 		}
 	}
 	return res_md

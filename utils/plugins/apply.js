@@ -1,3 +1,4 @@
 function($ctx, $args, $out) {
-	$args[0]($ctx, $args[1], $out)
+	if($args[0])
+		$args[0]($ctx, $args[1] || {}, $out)
 }

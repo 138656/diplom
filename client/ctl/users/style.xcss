@@ -1,0 +1,10 @@
+users_list [
+	item {
+		width: 100%;
+		margin: ${panel-padding};
+	}
+	item [
+		info(font-text, cl-text) {}
+		name(font-caption, cl-normal) {}
+	]
+]

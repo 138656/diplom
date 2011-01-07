@@ -42,5 +42,8 @@
 			if($args[0] && $args.yield)
 				$args.yield($ctx, [JSON.parse($args[0])], $out)
 		}
+	},
+	generate_id: function($ctx, $args, $out) {
+		$out.push(["id", new Date().getTime().toString(), Math.random().toString().replace(/\./g, "")].join("_"))
 	}
 }

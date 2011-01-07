@@ -14,3 +14,24 @@ string [
 	hover(normal, border-hover) {}
 	active(normal, border-active) {}
 ]
+
+content_title(font-caption, bg-light) {
+	border-bottom: solid 1px ${border-color-normal};
+	color: #5997C7;
+	padding: ${panel-padding-half} ${panel-padding};
+}
+
+content_divider [
+	box { width: 100%; }
+	content {
+		vertical-align: top;
+	}
+	actions {
+		vertical-align: top;
+		padding: ${panel-padding-half};
+		border-left: solid 1px ${border-color-normal};
+		background-color: ${color-title};
+	}
+]
+
+

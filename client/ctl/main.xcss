@@ -17,10 +17,23 @@ main [
 		table-layout: fixed;
 	}
 	menu {
-		margin: ${panel-padding-half} 0;
+		padding: ${panel-padding-half} 0 ${panel-padding} 0;
 	}
 	user-name {
 		display: block;
 		float: left;
+	}
+	cell {
+		height: 100%;
+		vertical-align: top;
+	}
+	content {
+		border-style: solid;
+		border-color: ${border-color-normal};
+		border-width: 0 1px 1px 1px;
+	}
+	content-box(content) {
+		border-color: #E0EBEF;
+		margin: 0 ${panel-padding-half} ${panel-padding-half} ${panel-padding-half};
 	}
 ]

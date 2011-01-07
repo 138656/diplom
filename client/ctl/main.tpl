@@ -15,26 +15,38 @@
 					${unless(${user}) #
 							${ctl.string(login_login description:"Логин")}
 							${ctl.string(login_password type:password description:"Пароль")}
-							${ctl.button(login_button href:${util.json.stringify({page:[login]})} caption:"Войти")}
+							${ctl.button(href:${util.json.stringify({page:[login]})} caption:"Войти")}
+							<script type="text/javascript">
+								\$(function() {
+									\$("\#login_login").add("\#login_password").keyup(function(e) {
+										if(e.keyCode==13)
+											\$history().data({page:["login"]});
+									})
+								})
+							</script>
 					#end}
 					${if(${user}) #
-						${ctl.button(login_button href:${util.json.stringify({page:[logout]})} caption:"Выйти")}
+						${ctl.button(href:${util.json.stringify({page:[logout]})} caption:"Выйти")}
 					#end}
 				</div>
 			#end}
 			<table cellspacing="0" cellpadding="0" class="main-divider">
-				<col width="130px">
-				<col width="700px">
+				<col width="160px">
+				<col width="670px">
 				<tbody><tr>
-					<td>
+					<td class="main-cell">
 						<div class="main-menu">
-							${foreach(${actions}) |a i| #
-								${ctl.button("main_menu_${i}" href:"{\"page\":[\"${a.name}\"]}" caption:${a.text} mode:link)}
+							${foreach(${actions}) |a| #
+								${ctl.button(href:"{\"page\":[\"${a.name}\"]}" caption:${a.text} mode:link)}
 							#end}
 						</div>
 					</td>
-					<td>
-						
+					<td class="main-cell">
+						<div class="main-content-box">
+							<div class="main-content" id="content">
+								
+							</div>
+						</div>
 					</td>
 				</tr></tbody>
 			</table>

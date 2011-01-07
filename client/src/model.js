@@ -16,6 +16,11 @@ var $model = (function() {
 		},
 		logout: function(cb) {
 			load("/login", {action: "logout", test:1}, cb)
+		},
+		users: {
+			search: function(params, cb) {
+				load("/users/search", params, cb)
+			}
 		}
 	}
 	return model

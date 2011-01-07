@@ -1,4 +1,9 @@
 
+
+$ctl.ctl = function(name, params) {
+	return tpl2js("client/ctl/controls.tpl", { ctl_name: name, ctl_params: params })
+}
+
 $ctl.string = function(id) {
 	var focus = false
 	var hover = false

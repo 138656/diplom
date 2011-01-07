@@ -37,10 +37,12 @@ var $history = function() {
 }
 
 
+
+function $show_error(msg, details) {
+	window.alert(msg);
+}
+
 $(function() {
-	function show_error(msg, details) {
-		window.alert(msg);
-	}
 	function update_page(data, path) {
 		if(path.length==0 || path[0]=="main") {
 		
@@ -48,18 +50,22 @@ $(function() {
 			var l = $("#login_login").val()
 			var p = $("#login_password").val()
 			if(!l || !p)
-				show_error("Введите логин и пароль")
+				$show_error("Введите логин и пароль")
 			else
 				$model.login(l, p, function(r) {
 						if(r.status)
 							window.location = "/"
 						else
-							show_error("Неправильный логин или пароль", null)
+							$show_error("Неправильный логин или пароль", null)
 					})
 		} else if(path[0]=="logout") {
 			$model.logout(function() {
 				window.location = "/"
 			})
+		} else if(path.length==1 && path[0]=="users") {
+			$("#content").html(tpl2js("client/ctl/controls.tpl", { ctl_name: "users_list",
+					ctl_params: {}
+				}))
 		}
 	}
 	$history().data.change(function(data) {

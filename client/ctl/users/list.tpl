@@ -20,7 +20,7 @@ ${lambda(${ctl} users_list_item)  |user id:${util.generate_id()}| #
 ${lambda(${ctl} users_list) |id:${util.generate_id()} actions:[{name:new text:"Создать"}]| #
 	${ctl.content_title("Пользователи")}
 	<div id="${id}">
-		${ctl.content_divider("<div id=\"${id}_list\" class=\"ctl-users_list\"></div><div id=\"${id}_pages\" class=\"ctl-users_list\"></div>"
+		${ctl.content_divider("<div class=\"ctl-users_list-search\">${ctl.string(id:"${id}_search")}</div><div id=\"${id}_list\" class=\"ctl-users_list\"></div><div id=\"${id}_pages\" class=\"ctl-users_list\"></div>"
 			${foreach(${actions}) |a| #
 					${ctl.button(caption:${a.text} mode:link href:${util.json.stringify({page:[users ${a.name}]})})}
 				#end})}

@@ -1,10 +1,15 @@
 users_list [
 	item {
-		width: 100%;
 		margin: ${panel-padding};
+		padding: ${panel-padding} ${panel-padding} 0 ${panel-padding};
+		border: solid ${border-color-normal};
+		border-width: 1px 0 0 0;
 	}
 	item [
 		info(font-text, cl-text) {}
 		name(font-caption, cl-normal) {}
 	]
+	search {
+		margin: ${panel-padding};
+	}
 ]

@@ -13,6 +13,10 @@ border-color-normal: #C5DBEC;
 border-color-hover: #79B7E7;
 border-color-active: ${border-color-hover};
 
+list-background-normal: white;
+list-background-hover: #EDEFF4;
+list-background-active: #F0FBFF;
+
 round-radius: 3px;
 panel-padding: 6px;
 panel-padding-double: 12px;
@@ -58,7 +62,10 @@ ctl [
 	include("button/button.xcss");
 	include("pagelist/pagelist.xcss");
 	include("util/util.xcss");
+	include("list/list.xcss");
 	include("users/style.xcss");
+	include("icon/icon.xcss");
+	include("form/form.xcss");
 ]
 
 

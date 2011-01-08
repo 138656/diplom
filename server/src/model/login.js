@@ -68,7 +68,7 @@ exports.init = function(model) {
 				main: "Главная",
 				users: "Пользователи",
 				teachers: "Учителя",
-				group: "Однокласники",
+				groups: "Классы",
 				students: "Ученики",
 				messages: "Сообщения",
 				catalog: "Каталог ресурсов"
@@ -80,11 +80,11 @@ exports.init = function(model) {
 			}
 			if(current_user) {
 				if(current_user._role_id=="admin")
-					return get_al("main", "users", "messages", "catalog")
+					return get_al("users", "groups")
 				if(current_user._role_id=="teacher")
 					return get_al("main", "teachers", "students", "messages", "catalog")
 				if(current_user._role_id=="student")
-					return get_al("main", "teachers", "group", "messages", "catalog")
+					return get_al("main", "teachers", "messages", "catalog")
 			}
 			return get_al("main", "catalog")
 		}

@@ -5,16 +5,6 @@ title(border-active, round-all, font-title, cl-title) {
 	padding: ${panel-padding-double};
 }
 
-string [
-	normal(round-all, font-text, cl-text, border-normal) {
-		padding: ${panel-padding-half};
-		margin: 0;
-		width: 200px;
-	}
-	hover(normal, border-hover) {}
-	active(normal, border-active) {}
-]
-
 content_title(font-caption, bg-light) {
 	border-bottom: solid 1px ${border-color-normal};
 	color: #5997C7;

@@ -1,15 +1,25 @@
 users_list [
-	item {
+	search, list {
 		margin: ${panel-padding};
-		padding: ${panel-padding} ${panel-padding} 0 ${panel-padding};
+	}
+]
+
+users_list_item [
+	info(font-text, cl-text) {}
+	name(font-caption, cl-normal) {}
+	normal {
+		padding: ${panel-padding};
 		border: solid ${border-color-normal};
 		border-width: 1px 0 0 0;
+		cursor: pointer;
+		background-color: ${list-background-normal};
 	}
-	item [
-		info(font-text, cl-text) {}
-		name(font-caption, cl-normal) {}
-	]
-	search {
-		margin: ${panel-padding};
+	hover(normal) {
+		border: solid ${border-color-hover};
+		background-color: ${list-background-hover};
+	}
+	active(normal) {
+		border: solid ${border-color-active};
+		background-color: ${list-background-active};
 	}
 ]

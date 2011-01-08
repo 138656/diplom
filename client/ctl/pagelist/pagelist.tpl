@@ -1,7 +1,7 @@
-${lambda(${ctl} pagelist)  |id:${util.generate_id()} pages:[]| #
-	<div class="ctl-pagelist" id="${id}">
-		${if(${pages["1"]}) #
-			${foreach(${pages}) |p| #<span id="${id}_${p.page}" onclick="${p.action}" class="${unless(${p.active}) #ctl-pagelist-normal#end}${if(${p.active}) #ctl-pagelist-selected#end}">${p.text}</span>#end}#end}
-	</div>
-	${init_control(pagelist ${id})}
+${lambda(${ctl} pagelist_pages) |id pages| #
+	${foreach(${pages}) |p| #<span onclick="\$ctl('${id}').page.dispatch(${p.page})" class="${unless(${p.active}) #ctl-pagelist-normal#end}${if(${p.active}) #ctl-pagelist-selected#end}">${p.text}</span>#end}
+#end}
+${lambda(${ctl} pagelist)  |id:${util.generate_id()}| #
+	<div class="ctl-pagelist" id="${id}"></div>
+	${init(${id})}
 #end}

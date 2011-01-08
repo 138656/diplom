@@ -63,9 +63,7 @@ $(function() {
 				window.location = "/"
 			})
 		} else if(path.length==1 && path[0]=="users") {
-			$("#content").html(tpl2js("client/ctl/controls.tpl", { ctl_name: "users_list",
-					ctl_params: {}
-				}))
+			$("#content").html($ctl.html("users_list", {}))
 		}
 	}
 	$history().data.change(function(data) {

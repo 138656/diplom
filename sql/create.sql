@@ -67,9 +67,17 @@ CREATE INDEX idx_users_messages_history ON users_messages(to_id, from_id, send_d
 CREATE TABLE groups (
 	id SERIAL PRIMARY KEY,
 	name VARCHAR(100) NOT NULL,
-	description TEXT,
-	manager_id INTEGER REFERENCES users
+	manager_id INTEGER REFERENCES users,
+	in_archive BOOL NOT NULL DEFAULT FALSE,
+	_fts tsvector
 );
+
+CREATE TRIGGER groups_ftstg BEFORE INSERT OR UPDATE
+ON groups FOR EACH ROW EXECUTE PROCEDURE
+	tsvector_update_trigger(_fts, 'pg_catalog.russian', name);
+CREATE INDEX groups_ftsidx ON groups USING gin(_fts);
+
+CREATE INDEX groups_arch_idx ON groups(in_archive);
 
 CREATE TABLE groups_users (
 	group_id INTEGER REFERENCES groups,

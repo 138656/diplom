@@ -2,7 +2,7 @@
 
 TPL_FILES=$(shell find client/ctl -name *.tpl)
 XCSS_FILES=$(shell find client/ctl -name *.xcss)
-JS_FILES=$(shell find client/ctl -name *.js)
+JS_FILES=$(shell find client/ctl/*/ -name *.js)
 
 CLIENT_JS = $(shell find client/src -name *.js)
 CLIENT_LIBS = $(shell find client/lib -name *.js)
@@ -54,8 +54,8 @@ static/js/client.js: ${CLIENT_JS}
 static/js/client_lib.js: ${CLIENT_LIBS}
 	cat ${CLIENT_LIBS} > static/js/client_lib.js
 
-static/js/ctl.js: ${JS_FILES}
-	echo "var \$$ctl = {};" > static/js/ctl.js
+static/js/ctl.js: ${JS_FILES} client/ctl/ctl.js
+	cat client/ctl/ctl.js  > static/js/ctl.js
 	cat ${JS_FILES} >> static/js/ctl.js
 
 static/js/ctl_tpl.js: ${TPL_FILES}

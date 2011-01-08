@@ -1,0 +1,13 @@
+string [
+	normal(round-all, font-text, cl-text, border-normal) {
+		padding: ${panel-padding-half};
+		margin: 0;
+		width: 18em;
+	}
+	hover(normal, border-hover) {}
+	active(normal, border-active) {}
+	text {
+		width: 30em !important;
+		height: 13em;
+	}
+]

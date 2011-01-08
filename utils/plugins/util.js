@@ -45,5 +45,13 @@
 	},
 	generate_id: function($ctx, $args, $out) {
 		$out.push(["id", new Date().getTime().toString(), Math.random().toString().replace(/\./g, "")].join("_"))
+	},
+	coalesce: function($ctx, $args, $out) {
+		var k = null;
+		for(var i in $args)
+			if($args[i] && (k===null || i<k))
+				k = i;
+		if(k!==null)
+			$out.push($args[k]);
 	}
 }

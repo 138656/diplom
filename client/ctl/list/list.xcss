@@ -1,0 +1,6 @@
+
+list [
+	pages {
+		padding-top: ${panel-padding-half};
+	}
+]

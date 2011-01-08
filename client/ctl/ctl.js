@@ -4,8 +4,11 @@ $ctl = (function() {
 	var res = function(id) {
 		var nd = $("#" + id)
 		if(nd) {
-			if(!nd.data("ctl"))
-				nd.data("ctl", init_fn[_.select(nd.attr("class").split(/\s+/), function(x) { return x.match(/^ctl\-/); }) [0].split("-")[1]](id, nd))
+			if(!nd.data("ctl")) {
+				var ctl = init_fn[_.select(nd.attr("class").split(/\s+/), function(x) { return x.match(/^ctl\-/); }) [0].split("-")[1]](id, nd);
+				ctl.destroy = function() { nd.remove(); }
+				nd.data("ctl", ctl)
+			}
 			return nd.data("ctl")
 		} else
 			$.log("Html node not exists. id: " + JSON.stringify(id))

@@ -1,0 +1,30 @@
+
+window {
+	display: inline-block;
+	padding-top: 10%;
+}
+
+window [
+	overlay {
+		background-image: url("${img-dir}/overlay.png");
+		position: fixed;
+		overflow: auto;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		display: none;
+	}
+	title(round-top, border-active, font-caption, cl-title) {
+		background-image: url("${img-dir}/wave.png");
+		background-position: center center;
+		padding: ${panel-padding};
+	}
+	content(round-bottom) {
+		border: solid ${border-color-normal};
+		border-width: 0 1px 1px 1px;
+		background-color: ${color-title};
+		padding: ${panel-padding};
+	}
+]

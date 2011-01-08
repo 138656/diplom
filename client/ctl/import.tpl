@@ -7,3 +7,4 @@ ${lambda(init) |id| #<script type="text/javascript">\$ctl("${id}")</script>#end}
 @parse("users/list.tpl")
 @parse("icon/icon.tpl")
 @parse("form/form.tpl")
+@parse("window/window.tpl")

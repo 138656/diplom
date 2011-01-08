@@ -66,6 +66,7 @@ ctl [
 	include("users/style.xcss");
 	include("icon/icon.xcss");
 	include("form/form.xcss");
+	include("window/window.xcss");
 ]
 
 

@@ -24,11 +24,19 @@ $ctl.control("string", function(id, nd) {
 	return res
 });
 
-$ctl.control("checkbox", function(id, nd) {
+$ctl.control("hidden", function(id, nd) {
 	var res = $control("value")
 	res.value(nd.val())
-	res.value.change(function(v) { nd.val(v); })
 	nd.change(function() { res.value(nd.val()); })
+	res.value.change(function(v) { nd.val(v); })
+	return res
+});
+
+$ctl.control("checkbox", function(id, nd) {
+	var res = $control("value")
+	res.value(nd.attr("checked"))
+	res.value.change(function(v) { nd.attr("checked", !!v); })
+	nd.click(function() { res.value(nd.attr("checked")); })
 	return res
 });
 
@@ -58,3 +66,24 @@ $ctl.control("select", function(id, nd) {
 	})
 	return res
 });
+
+$ctl.control("form", function(nd, id) {
+	var res = $control("value").value({})
+	var fields = {}
+	res.append_field = function(nm, f_id) {
+		fields[nm] = $ctl(f_id)
+		function upd() {
+			if(res.value())
+				res.value()[nm] = fields[nm].value()
+		}
+		upd()
+		fields[nm].value.change(upd)
+		res.value.change(function(v) {
+			if(v)
+				fields[nm].value(v[nm])
+		})
+		$ctl(f_id).value()
+	}
+	return res
+});
+

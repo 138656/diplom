@@ -4,6 +4,7 @@ ${lambda(${ctl} users_form) |id:${util.generate_id()} value:""| #
 		${set(form) #
 			<div class="ctl-users_form-form">
 				${ctl.form(id:"${id}_form") |row| #
+					${row(name:id ctl_name:hidden ctl_params:{id:"${id}_id" value:"${value.id}"})}
 					${row(name:name1 caption:"Фамилия" ctl_name:string ctl_params:{id:"${id}_name1" value:"${value.name1}"})}
 					${row(name:name2 caption:"Имя" ctl_name:string ctl_params:{id:"${id}_name2" value:"${value.name2}"})}
 					${row(name:name3 caption:"Отчество" ctl_name:string ctl_params:{id:"${id}_name3" value:"${value.name3}"})}

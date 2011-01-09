@@ -74,9 +74,9 @@ CREATE TABLE groups (
 CREATE TRIGGER groups_ftstg BEFORE INSERT OR UPDATE
 ON groups FOR EACH ROW EXECUTE PROCEDURE
 	tsvector_update_trigger(_fts, 'pg_catalog.russian', name);
-CREATE INDEX groups_ftsidx ON groups USING gin(_fts);
-
+CREATE INDEX groups_ftsidx ON groups USING gin(_fts) WHERE NOT(in_archive);
 CREATE INDEX groups_arch_idx ON groups(in_archive);
+CREATE INDEX groups_sort_idx ON groups(name, id);
 
 CREATE TABLE groups_users (
 	group_id INTEGER REFERENCES groups,

@@ -5,7 +5,7 @@ var fs = require('fs')
 var path = require('path')
 var config = JSON.parse(fs.readFileSync("config.json").toString("UTF-8"))
 
-var plugins_list = ["login", "users", "files", "images", "roles"]
+var plugins_list = ["login", "users", "files", "images", "roles", "groups"]
 var plugins = _(plugins_list).reduce(function(r, v) {
 		r[v] = require("./model/" + v).init
 		return r

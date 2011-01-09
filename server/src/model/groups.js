@@ -22,6 +22,7 @@ exports.init = function(model) {
 				else
 					cnd.push("id=" + val(params.id))
 			}
+			cnd.push("NOT(in_archive)")
 			var q = []
 			q.push("SELECT id, name, manager_id, (SELECT name2 || ' ' || name1 FROM users WHERE id=g.manager_id) as manager_name FROM groups g ")
 			if(cnd.length) {
@@ -112,6 +113,9 @@ exports.init = function(model) {
 									cn.query("UPDATE groups_users SET group_id=$1 WHERE group_id=$2", [new_id, id], callback)
 								} else
 									callback(new Error("Группа не найдена. id: " + JSON.stringify(id)), null)
+							},
+							function(r, callback) {
+								cn.query("UPDATE groups SET in_archive=TRUE WHERE id=$1", [id], callback)
 							},
 							function(r, callback) {
 								cn.query("COMMIT", callback)

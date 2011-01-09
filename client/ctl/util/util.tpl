@@ -12,4 +12,9 @@ ${lambda(${ctl} content_divider) |c a| #
 		</tbody>
 	</table>
 #end}
-
+${lambda(${ctl} clickable_list_item) |id:${util.generate_id()} action yield| #
+	<div id="${id}" class="ctl-clickable_list_item-normal" onclick="${util.html.escape(${action})}">
+		${yield()}
+	</div>
+	${init(${id})}
+#end}

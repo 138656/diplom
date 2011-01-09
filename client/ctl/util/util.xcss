@@ -24,4 +24,22 @@ content_divider [
 	}
 ]
 
+clickable_list_item [
+	normal {
+		padding: ${panel-padding};
+		border: solid ${border-color-normal};
+		border-width: 1px 0 0 0;
+		cursor: pointer;
+		background-color: ${list-background-normal};
+	}
+	hover(normal) {
+		border: solid ${border-color-hover};
+		background-color: ${list-background-hover};
+	}
+	active(normal) {
+		border: solid ${border-color-active};
+		background-color: ${list-background-active};
+	}
+]
+
 

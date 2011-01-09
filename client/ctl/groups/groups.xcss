@@ -1,0 +1,11 @@
+
+groups_list [
+	search, list {
+		margin: ${panel-padding};
+	}
+]
+
+groups_list_item [
+	info(font-text, cl-text) {}
+	name(font-caption, cl-normal) {}
+]

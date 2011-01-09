@@ -1,12 +1,11 @@
 ${lambda(${ctl} users_list_item)  |id:${util.generate_id()} items:[]| #
 	${foreach(${items}) |item i| #
-		<div id="${id}_${i}" class="ctl-users_list_item-normal" onclick="\$history().data(${util.html.escape(${util.json.stringify({page:[users ${item.id}]})})})">
+		${ctl.clickable_list_item(action:"\$history().data(${util.json.stringify({page:[users ${item.id}]})})") #
 			<div class="ctl-users_list_item-name">${item.name1} ${item.name2} ${item.name3}</div>
 			<div class="ctl-users_list_item-info">
 				<div>${item.role}</div>
 			</div>
-		</div>
-		${init("${id}_${i}")}
+		#end}
 	#end}
 #end}
 ${lambda(${ctl} users_list) |id:${util.generate_id()} actions:[{name:new text:"Создать"}]| #

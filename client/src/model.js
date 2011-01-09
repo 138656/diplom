@@ -55,6 +55,18 @@ var $model = (function() {
 				}
 			}
 		},
+		groups: {
+			search: function(params, cb) {
+				load("/groups/search", params, cb)
+			},
+			get: function(id, cb) {
+				load("/groups/search", { mode:"full", id:id }, function(r) {
+					var u = r.data[0]
+					u.manager = { id: u.manager_id, text: u.manager_name }
+					cb(u)
+				})
+			}
+		},
 		roles: function(cb) {
 			load("/roles", {}, function(dt) {
 				model.roles = function(cb2) { _.defer(function() { cb2(dt); }); }

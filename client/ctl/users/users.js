@@ -1,9 +1,4 @@
 
-$ctl.control("users_list_item", function(id, nd) {
-	nd.active("ctl-users_list_item-normal", "ctl-users_list_item-hover", "ctl-users_list_item-active")
-	return {}
-});
-
 $ctl.control("users_list", function(id, nd) {
 	function data_source() {
 		var text = $ctl(id + "_search").value()

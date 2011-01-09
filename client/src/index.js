@@ -74,6 +74,8 @@ $(function() {
 				}
 			} else
 				$("#content").html($ctl.html("users_list", {}))
+		} else if(path.length>=1 && path[0]=="groups")  {
+			$("#content").html($ctl.html("groups_list", {}))
 		}
 	}
 	function call_update(data) {

@@ -11,3 +11,21 @@ string [
 		height: 13em;
 	}
 ]
+
+form {
+	width: 100%;
+	table-layout: auto;
+}
+
+form [
+	caption(cl-normal, font-caption) {
+		text-align: right;
+		width: 30%;
+		padding: 0 ${panel-padding} 1px ${panel-padding-double};
+	}
+	control {
+		width: 70%;
+		padding: 0 ${panel-padding-double} 1px ${panel-padding};
+		text-align: left;
+	}
+]

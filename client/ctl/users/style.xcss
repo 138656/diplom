@@ -4,6 +4,12 @@ users_list [
 	}
 ]
 
+users_form [
+	form {
+		margin: ${panel-padding-double} 0 ${panel-padding-double} 0;
+	}
+]
+
 users_list_item [
 	info(font-text, cl-text) {}
 	name(font-caption, cl-normal) {}

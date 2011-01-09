@@ -22,7 +22,6 @@ CREATE TABLE users (
 	name1 VARCHAR(100) NOT NULL,
 	name2 VARCHAR(100) NOT NULL,
 	name3 VARCHAR(100),
-	address TEXT,
 	phone VARCHAR(100),
 	photo INTEGER REFERENCES files(id),
 	_login VARCHAR(100) UNIQUE NOT NULL,

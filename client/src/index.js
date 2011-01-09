@@ -62,11 +62,17 @@ $(function() {
 			$model.logout(function() {
 				window.location = "/"
 			})
-		} else if(path.length==1 && path[0]=="users") {
-			$("#content").html($ctl.html("users_list", {}))
+		} else if(path.length>=1 && path[0]=="users") {
+			if(path.length>1) {
+				if(path[1]=="new")
+					$("#content").html($ctl.html("users_form", {}))
+			} else
+				$("#content").html($ctl.html("users_list", {}))
 		}
 	}
-	$history().data.change(function(data) {
+	function call_update(data) {
 		update_page(data, (data && data.page && data.page instanceof Array) ? data.page : [])
-	})
+	}
+	$history().data.change(call_update)
+	call_update($history().data())
 });

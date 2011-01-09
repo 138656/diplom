@@ -21,6 +21,12 @@ var $model = (function() {
 			search: function(params, cb) {
 				load("/users/search", params, cb)
 			}
+		},
+		roles: function(cb) {
+			load("/roles", {}, function(dt) {
+				model.roles = function(cb2) { _.defer(function() { cb2(dt); }); }
+				cb(dt)
+			})
 		}
 	}
 	return model

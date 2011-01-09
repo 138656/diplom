@@ -20,11 +20,33 @@ window [
 		background-image: url("${img-dir}/wave.png");
 		background-position: center center;
 		padding: ${panel-padding};
+		overflow: hidden;
+	}
+	title_text {
+		display: inline-block;
+		padding: ${panel-padding-half} ${panel-padding-double} ${panel-padding-half} ${panel-padding};
+		margin-top: 1px;
+		margin-right: ${panel-padding-double};
 	}
 	content(round-bottom) {
 		border: solid ${border-color-normal};
 		border-width: 0 1px 1px 1px;
 		background-color: ${color-title};
 		padding: ${panel-padding};
+	}
+]
+
+select_window_items [
+	normal(round-all, cl-normal, font-caption) {
+		cursor: pointer;
+		text-align: left;
+		padding: ${panel-padding};
+		cursor: pointer;
+	}
+	hover(normal, cl-hover, bg-hover) {
+		
+	}
+	active(normal, cl-active, bg-active) {
+		
 	}
 ]

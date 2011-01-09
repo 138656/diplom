@@ -24,7 +24,7 @@ exports.init = function(model) {
 			}
 			cnd.push("NOT(in_archive)")
 			var q = []
-			q.push("SELECT id, name, manager_id, (SELECT name2 || ' ' || name1 FROM users WHERE id=g.manager_id) as manager_name FROM groups g ")
+			q.push("SELECT id, name, manager_id, (SELECT name2 || COALESCE(' ' || name3, '') || ' ' || name1 FROM users WHERE id=g.manager_id) as manager_name FROM groups g ")
 			if(cnd.length) {
 				q.push("WHERE ")
 				q.push(_(cnd).map(function(x) { return "(" + x + ")"; }).join(" AND "))

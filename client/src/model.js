@@ -31,7 +31,6 @@ var $model = (function() {
 			create: function(dt, cb) {
 				if(dt._role)
 					dt._role_id = dt._role.id
-				dt._blocked = !!dt._blocked
 				load("/users/create", _(["name1", "name2", "name3", "phone",
 					"_login", "_password", "_role_id", "_blocked"]).reduce(function(r, v) {
 							r[v] = dt[v] || ""
@@ -44,6 +43,8 @@ var $model = (function() {
 				if(!dt.id)
 					cb(null)
 				else {
+					if(dt._role)
+						dt._role_id = dt._role.id
 					load("/users/update", _(["id", "name1", "name2", "name3", "phone",
 						"_login", "_password", "_role_id", "_blocked"]).reduce(function(r, v) {
 								if(v!="_password" || dt[v])
@@ -65,6 +66,14 @@ var $model = (function() {
 					u.manager = { id: u.manager_id, text: u.manager_name }
 					cb(u)
 				})
+			},
+			create: function(dt, cb) {
+				if(dt.manager)
+					dt.manager_id = dt.manager.id
+				load("/groups/create", _(["name", "manager_id"]).reduce(function(r, v) {
+							r[v] = dt[v] || ""
+							return r
+						}, {}), cb);
 			}
 		},
 		roles: function(cb) {

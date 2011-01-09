@@ -1,6 +1,6 @@
 ${lambda(${ctl} users_form) |id:${util.generate_id()} value:""| #
 	<div id="${id}" class="ctl-users_form">
-		${ctl.content_title("${unless(${value}) #Создание пользователя#end}${if(${value}) #Редактирование данных пользователя#end}" )}
+		${ctl.content_title("${unless(${value}) #Новый пользователь#end}${if(${value}) #Редактирование данных пользователя#end}" )}
 		${set(form) #
 			<div class="ctl-users_form-form">
 				${ctl.form(id:"${id}_form") |row| #

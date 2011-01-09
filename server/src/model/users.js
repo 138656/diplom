@@ -5,7 +5,7 @@ var _ = require("underscore")._;
 var views = {
 		"full": ["id", "name1", "name2", "name3", "phone", "NOT(photo IS NULL) as has_photo", "_login", "_role_id", "(SELECT name FROM users_roles WHERE system_name=users._role_id) as role", "_blocked"],
 		"short": ["id", "name1", "name2", "name3", "NOT(photo IS NULL) as has_photo", "(SELECT name FROM users_roles WHERE system_name=users._role_id) as role"],
-		"combo": ["id", "(name1 || ' ' || name2 || COALESCE(' ' || name3, '')) as name"]
+		"combo": ["id", "(name1 || ' ' || name2 || COALESCE(' ' || name3, '')) as text"]
 	}
 
 var columns = ["name1", "name2", "name3", "phone", "_login",  "_password", "_role_id", "_blocked"]

@@ -15,3 +15,27 @@ $ctl.control("groups_list", function(id, nd) {
 	$ctl(id + "_search").value.change(function() { $ctl(id + "_list").data_source(data_source()); })
 	return {}
 });
+
+
+$ctl.control("groups_form", function(id, nd) {
+	var res = { value: $ctl(id + "_form").value };
+	$ctl(id + "_manager").data_source(function(s, l, cb) {
+		$model.users.search({ mode:"combo", offset:s, limit:l, role:"teacher" }, function(r) {
+			if(r.status)
+				cb(r.data)
+		})
+	})
+	return res
+});
+
+$ctl.control("groups_new", function(id, nd) {
+	var gr_form = $ctl(id + "_form")
+	$ctl(id + "_save").click(function() {
+		$model.groups.create(gr_form.value(), function(r) {
+			if(r.status)
+				$history().data({page:["groups", r.data]})
+		})
+	})
+	return {}
+});
+

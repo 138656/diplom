@@ -9,3 +9,7 @@ groups_list_item [
 	info(font-text, cl-text) {}
 	name(font-caption, cl-normal) {}
 ]
+
+groups_form {
+	margin: ${panel-padding-double} 0;
+}

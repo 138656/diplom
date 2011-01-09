@@ -1,7 +1,7 @@
 
 var _ = require("underscore")._;
 
-var columns = ["name", "namager_id"]
+var columns = ["name", "manager_id"]
 
 exports.init = function(model) {
 	var res_md = {
@@ -23,12 +23,12 @@ exports.init = function(model) {
 					cnd.push("id=" + val(params.id))
 			}
 			var q = []
-			q.push("SELECT id, name, manager_id, (SELECT name2 || name1 FROM users WHERE id=g.manager_id) as manager_name FROM groups g ")
+			q.push("SELECT id, name, manager_id, (SELECT name2 || ' ' || name1 FROM users WHERE id=g.manager_id) as manager_name FROM groups g ")
 			if(cnd.length) {
 				q.push("WHERE ")
 				q.push(_(cnd).map(function(x) { return "(" + x + ")"; }).join(" AND "))
 			}
-			q.push(" ORDER BY name1, id")
+			q.push(" ORDER BY name, id")
 			if(params.limit) {
 				var v = val(params.limit)
 				q.push(" LIMIT ")

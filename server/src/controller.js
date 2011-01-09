@@ -4,7 +4,7 @@ var cookie = require('cookie')
 var urllib = require('url')
 var _ = require('underscore')._;
 
-var ctl_list = ["login", "root", "static", "users", "roles"]
+var ctl_list = ["login", "root", "static", "users", "roles", "groups"]
 var ctl = _(ctl_list).reduce(function(r, v){
 		r[v] = require("./controller/" + v).action
 		return r

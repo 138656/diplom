@@ -20,6 +20,39 @@ var $model = (function() {
 		users: {
 			search: function(params, cb) {
 				load("/users/search", params, cb)
+			},
+			get: function(id, cb) {
+				load("/users/search", { mode:"full", id:id }, function(r) {
+					var u = r.data[0]
+					u._role = { id: u._role_id, text: u.role }
+					cb(u)
+				})
+			},
+			create: function(dt, cb) {
+				if(dt._role)
+					dt._role_id = dt._role.id
+				dt._blocked = !!dt._blocked
+				load("/users/create", _(["name1", "name2", "name3", "phone",
+					"_login", "_password", "_role_id", "_blocked"]).reduce(function(r, v) {
+							r[v] = dt[v] || ""
+							if(v="_blocked")
+								r[v] = r[v] ? "1" : "0"
+							return r
+						}, {}), cb);
+			},
+			save: function(dt, cb) {
+				if(!dt.id)
+					cb(null)
+				else {
+					load("/users/update", _(["id", "name1", "name2", "name3", "phone",
+						"_login", "_password", "_role_id", "_blocked"]).reduce(function(r, v) {
+								if(v!="_password" || dt[v])
+									r[v] = dt[v] || ""
+								if(v="_blocked")
+									r[v] = r[v] ? "1" : "0"
+								return r
+							}, {}), cb);
+				}
 			}
 		},
 		roles: function(cb) {

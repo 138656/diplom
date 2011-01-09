@@ -36,7 +36,9 @@ $ctl.control("checkbox", function(id, nd) {
 	var res = $control("value")
 	res.value(nd.attr("checked"))
 	res.value.change(function(v) { nd.attr("checked", !!v); })
-	nd.click(function() { res.value(nd.attr("checked")); })
+	nd.change(function() { 
+		res.value(nd.attr("checked"));
+	})
 	return res
 });
 

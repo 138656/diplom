@@ -8,7 +8,6 @@ ${lambda(${ctl} users_form) |id:${util.generate_id()} value:""| #
 					${row(name:name1 caption:"Фамилия" ctl_name:string ctl_params:{id:"${id}_name1" value:"${value.name1}"})}
 					${row(name:name2 caption:"Имя" ctl_name:string ctl_params:{id:"${id}_name2" value:"${value.name2}"})}
 					${row(name:name3 caption:"Отчество" ctl_name:string ctl_params:{id:"${id}_name3" value:"${value.name3}"})}
-					${row(name:address caption:"Адрес" ctl_name:string ctl_params:{id:"${id}_address" value:"${value.address}"})}
 					${row(name:phone caption:"Телефон" ctl_name:string ctl_params:{id:"${id}_phone" value:"${value.phone}"})}
 					${row(name:_login caption:"Логин" ctl_name:string ctl_params:{id:"${id}_login" value:"${value._login}"})}
 					${row(name:_password caption:"Пароль" ctl_name:string ctl_params:{id:"${id}_password" type:password value:""})}

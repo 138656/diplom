@@ -31,7 +31,18 @@ $ctl.control("users_form", function(id, nd) {
 			}
 		})
 	})
-	return {}
+	$ctl(id + "_save").click(function() {
+		var v = $ctl(id + "_form").value()
+		if(!v.id) {
+			$model.users.create(v, function(r) {
+					if(r.status)
+						$history().data({page:["users", r.data]})
+				})
+		} else {
+			$model.users.save(v, function(r) { })
+		}
+	})
+	return { value: $ctl(id + "_form").value }
 });
 
 

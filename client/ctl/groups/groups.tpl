@@ -23,7 +23,7 @@ ${lambda(${ctl} groups_form) |id:${util.generate_id()} value:""| #
 		${ctl.form(id:"${id}_form") |row| #
 			${row(name:id ctl_name:hidden ctl_params:{id:"${id}_id" value:"${value.id}"})}
 			${row(name:name caption:"Название" ctl_name:string ctl_params:{id:"${id}_name" value:"${value.name}"})}
-			${row(name:manager caption:"Класcный руководитель" ctl_name:select ctl_params:{id:"${id}_manager" window_title:"Выберете клаcсного руководителя" value:${value.manager}})}
+			${row(name:manager caption:"Класcный руководитель" ctl_name:select ctl_params:{id:"${id}_manager" window_title:"Выберите клаcсного руководителя" value:${value.manager}})}
 		#end}
 	</div>
 	${init(${id})}
@@ -60,7 +60,7 @@ ${lambda(${ctl} groups_edit) |id:${util.generate_id()}| #
 			${ctl.groups_form(id:"${id}_form")}
 			${ctl.group_title(title:"Ученики" actions:[{id:"${id}_add_student" icon:plus}])}
 			${ctl.list(id:"${id}_students" item_control:groups_students)}
-			${ctl.select_window(id:"${id}_select_student" title:"Выберете ученика")}
+			${ctl.select_window(id:"${id}_select_student" title:"Выберите ученика")}
 		#end}
 		${ctl.content_title("Редактирование класса")}
 		${ctl.content_divider(${content} ${actions})}

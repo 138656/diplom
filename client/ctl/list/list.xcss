@@ -3,4 +3,13 @@ list [
 	pages {
 		padding-top: ${panel-padding-half};
 	}
+	empty(font-text, cl-title) {
+		display: none;
+		padding: 5em 0;
+		background-color: ${color-title};
+		color: ${border-color-hover};
+		text-align: center;
+		margin: ${panel-padding};
+		border: solid 1px ${border-color-normal};
+	}
 ]

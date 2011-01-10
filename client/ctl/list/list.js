@@ -10,6 +10,7 @@ $ctl.control("list", function(id, nd) {
 	function update_view() {
 		if(res.items_control())
 			$("#" + id + "_items").html($ctl.html(res.items_control(), { items: list && list.items() }));
+		$("#" + id + "_empty").css("display", (!list || !list.items().length) ? "block" : "none")
 	}
 	res.items_control.change(update_view);
 	function update_list() {

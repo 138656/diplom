@@ -27,6 +27,7 @@ window [
 		padding: ${panel-padding-half} ${panel-padding-double} ${panel-padding-half} ${panel-padding};
 		margin-top: 1px;
 		margin-right: ${panel-padding-double};
+		float: left;
 	}
 	content(round-bottom) {
 		border: solid ${border-color-normal};

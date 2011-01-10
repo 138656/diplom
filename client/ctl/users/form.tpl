@@ -12,7 +12,7 @@ ${lambda(${ctl} users_form) |id:${util.generate_id()} value:""| #
 					${row(name:_login caption:"Логин" ctl_name:string ctl_params:{id:"${id}_login" value:"${value._login}"})}
 					${row(name:_password caption:"Пароль" ctl_name:string ctl_params:{id:"${id}_password" type:password value:""})}
 					${row(name:_confirm caption:"Подтверждение" ctl_name:string ctl_params:{id:"${id}_confirm" type:password value:""})}
-					${row(name:_role caption:"Роль" ctl_name:select ctl_params:{id:"${id}_role" window_title:"Выберете роль" value:${value.role}})}
+					${row(name:_role caption:"Роль" ctl_name:select ctl_params:{id:"${id}_role" window_title:"Выберите роль" value:${value.role}})}
 					${row(name:_blocked caption:"Заблокирован" ctl_name:checkbox ctl_params:{id:"${id}_blocked" value:${value._blocked}})}
 				#end}
 			</div>

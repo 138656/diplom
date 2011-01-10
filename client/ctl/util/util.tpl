@@ -18,3 +18,22 @@ ${lambda(${ctl} clickable_list_item) |id:${util.generate_id()} action yield| #
 	</div>
 	${init(${id})}
 #end}
+${lambda(${ctl} actions_list_item) |id:${util.generate_id()} actions yield| #
+	<div id="${id}" class="ctl-actions_list_item-normal">
+		<table class="ctl-actions_list_item-table"><tr>
+			<td width="100%">${yield()}</td>
+			<td>
+				${foreach(${actions}) |a| #
+					${ctl.button(mode:link
+						caption:${a.name}
+						action:${util.html.escape(${a.action})})}
+				#end}
+			</td>
+		</tr></table>
+	</div>
+	${init(${id})}
+#end}
+${lambda(${ctl} group_title) |title| #
+	<div class="ctl-group_title">${util.html.escape(${title})}</div>
+#end}
+

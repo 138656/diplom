@@ -39,3 +39,57 @@ $ctl.control("groups_new", function(id, nd) {
 	return {}
 });
 
+$ctl.control("groups_edit", function(id, nd) {
+	var res = $control("value")
+	var gr_form = $ctl(id + "_form")
+	res.value.change(gr_form.value)
+	gr_form.value.change(res.value)
+	$ctl(id + "_save").click(function() {
+		$model.groups.save(gr_form.value(), function(r) {
+			/*if(r.status)
+				$history().data({page:["groups", r.data]})*/
+		})
+	})
+	var sel_student = $ctl(id + "_select_student")
+	var students = $ctl(id + "_students")
+	var students_ds = null
+	res.value.change(function(v) {
+		students_ds = function(s, l, cb) {
+				$model.users.search({ offset:s, limit:l, role:"student", group:res.value().id }, function(r) {
+					if(r.status)
+						cb(_.map(r.data, function(x) {
+								return _.extend(_.clone(x), { actions:[{name:"Удалить", action:"$ctl('" + id + "').remove_student('" + x.id + "')"}] })
+							}))
+				})
+			}
+		students.data_source(students_ds)
+	})
+	sel_student.data_source(function(s, l, cb) {
+		$model.users.search({ mode:"combo", offset:s, limit:l, role:"student" }, function(r) {
+			if(r.status)
+				cb(_.map(r.data, function(x) {
+						return _.extend(_.clone(x), { action: "$ctl('" + id + "').append_student('" + x.id + "')" })
+					}))
+		})
+	})
+	res.append_student = function(s) {
+		sel_student.visible(false)
+		$model.groups.append_student(res.value().id, s, function() {
+			students.data_source(null)
+			students.data_source(students_ds)
+		})
+	}
+	res.remove_student = function(s) {
+		if(window.confirm("Вы действительно хотите удалить ученика из класса?")) {
+			$model.groups.remove_student(res.value().id, s, function() {
+				students.data_source(null)
+				students.data_source(students_ds)
+			})
+		}
+	}
+	$ctl(id + "_addst").click(function() {
+		sel_student.visible(true)
+	})
+	return res
+});
+

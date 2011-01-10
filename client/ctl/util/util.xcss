@@ -42,4 +42,27 @@ clickable_list_item [
 	}
 ]
 
+group_title(font-caption) {
+	color: ${border-color-hover};
+	padding-left: ${panel-padding-half};
+	margin: ${panel-padding} ${panel-padding} ${panel-padding-half} ${panel-padding};
+	overflow: hidden;
+}
+
+actions_list_item [
+	table {
+		width: 100%;
+	}
+	normal {
+		padding: ${panel-padding};
+		border: solid ${border-color-normal};
+		border-width: 1px 0 0 0;
+		background-color: ${list-background-normal};
+	}
+	hover(normal) {
+		border: solid ${border-color-hover};
+		background-color: ${color-title};
+	}
+]
+
 

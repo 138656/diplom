@@ -44,7 +44,7 @@ var $list = function(page_size, preload_pages) {
 							text: (function() {
 									if(p==min_page && p!=0)
 										return "<"
-									else if(p==max_page && !(eos && p==pc))
+									else if(p==(max_page-1) && !(eos && p==(pc-1)))
 										return ">"
 									else
 										return new String(p+1)

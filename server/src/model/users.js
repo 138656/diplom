@@ -29,6 +29,8 @@ exports.init = function(model) {
 				else
 					cnd.push("id=" + val(params.id))
 			}
+			if(params.group)
+				cnd.push("id IN (SELECT user_id FROM groups_users WHERE group_id=" + val(params.group) + ")")
 			var q = []
 			q.push("SELECT " + views[mode].join(", ") + " FROM users ")
 			if(cnd.length) {

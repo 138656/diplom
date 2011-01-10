@@ -1,5 +1,5 @@
 $ctl.control("list", function(id, nd) {
-	var res = $control("data_source", "page_size", "preload", "items_control").page_size(30).preload(3).items_control(nd.attr("class").replace(/^ctl-list-/, ""));
+	var res = $control("data_source", "page_size", "preload", "items_control").page_size(20).preload(3).items_control(nd.attr("class").replace(/^ctl-list-/, ""));
 	$("#" + id + "_pages").html($ctl.html("pagelist", { id:id+"_pl" }))
 	var pagelist = $ctl(id+"_pl")
 	var list = null
@@ -13,6 +13,8 @@ $ctl.control("list", function(id, nd) {
 	}
 	res.items_control.change(update_view);
 	function update_list() {
+		if(list)
+			list.unbind_all()
 		list = $list(res.page_size(), res.preload())
 		pagelist.page_list(list.page_list() || [])
 		list.page_list.change(pagelist.page_list)

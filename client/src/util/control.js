@@ -31,6 +31,9 @@ var $control = (function() {
 			p.change(res)
 			return obj
 		}
+		res.unbind_all = function() {
+			listeners = []
+		}
 		return res
 	}
 	
@@ -55,16 +58,29 @@ var $control = (function() {
 				throw e
 			}
 		}
+		res.unbind_all = function() {
+			listeners = []
+		}
 		return res
 	}
 	return function() {
-		return _.reduce(arguments, function(r, v) {
+		var args = arguments
+		var r = _.reduce(args, function(r, v) {
 				if(v.substr(0, 1)=="@")
 					r[v.substr(1, v.length)] = ev(r)
 				else
 					r[v] = prop(r)
 				return r
 			}, {})
+		r.unbind_all = function() {
+			_.each(args, function(v) {
+				if(v.substr(0, 1)=="@")
+					r[v.substr(1, v.length)].unbind_all()
+				else
+					r[v].unbind_all()
+			})
+		}
+		return r
 	}
 })();
 

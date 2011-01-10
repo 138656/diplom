@@ -24,9 +24,17 @@ exports.action = function(req, res, model) {
 					send(res, e, null)
 				})
 		} else if(path.length==2 && path[1]=="move_to_arch") {
-			model.groups(fields.id || "", fields.new_name || "", function(e, r) {
+			model.groups().move_to_arch(fields.id || "", fields.new_name || "", function(e, r) {
 					send(res, e, r)
 				})
+		} else if(path.length==2 && path[1]=="append_student") {
+			model.groups().append_student(fields.group_id || "", fields.student || "", function(e) {
+				send(res, e, null)
+			})
+		} else if(path.length==2 && path[1]=="remove_student") {
+			model.groups().remove_student(fields.group_id || "", fields.student || "", function(e) {
+				send(res, e, null)
+			})
 		} else
 			util.error(res, "Invalid request")
 	})

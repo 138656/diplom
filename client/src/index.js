@@ -68,7 +68,7 @@ $(function() {
 					$("#content").html($ctl.html("users_form", {}))
 				else if(path[1].toString().match(/^\d+$/)) {
 					$model.users.get(path[1], function(r) {
-						$("#content").html($ctl.html("users_form", {id:"user_edit"}))
+						$("#content").html($ctl.html("users_form", {id:"user_edit", value: r }))
 						$ctl("user_edit").value(r)
 					})
 				}
@@ -79,7 +79,10 @@ $(function() {
 				if(path[1]=="new")
 					$("#content").html($ctl.html("groups_new", {}))
 				else if(path[1].toString().match(/^\d+$/)) {
-					
+					$model.groups.get(path[1], function(r) {
+						$("#content").html($ctl.html("groups_edit", {id:"groups_edit", value: r }))
+						$ctl("groups_edit").value(r)
+					})
 				}
 			} else
 				$("#content").html($ctl.html("groups_list", {}))

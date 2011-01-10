@@ -24,7 +24,7 @@ $ctl.control("select_window", function(id, nd) {
 	res.page_size = list.page_size
 	res.preload = list.preload
 	res.preload(3)
-	res.page_size(20)
+	res.page_size(10)
 	return res
 });
 

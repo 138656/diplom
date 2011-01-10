@@ -13,3 +13,11 @@ groups_list_item [
 groups_form {
 	margin: ${panel-padding-double} 0;
 }
+
+groups_students {
+	margin: 0 ${panel-padding} 0  ${panel-padding};
+}
+
+groups_students [
+	title(font-caption, cl-normal) {}
+]

@@ -67,10 +67,24 @@ var $model = (function() {
 					cb(u)
 				})
 			},
+			append_student: function(group, student, cb) {
+				load("/groups/append_student", { group_id:group, student:student }, cb)
+			},
+			remove_student: function(group, student, cb) {
+				load("/groups/remove_student", { group_id:group, student:student }, cb)
+			},
 			create: function(dt, cb) {
 				if(dt.manager)
 					dt.manager_id = dt.manager.id
 				load("/groups/create", _(["name", "manager_id"]).reduce(function(r, v) {
+							r[v] = dt[v] || ""
+							return r
+						}, {}), cb);
+			},
+			save: function(dt, cb) {
+				if(dt.manager)
+					dt.manager_id = dt.manager.id
+				load("/groups/update", _(["id", "name", "manager_id"]).reduce(function(r, v) {
 							r[v] = dt[v] || ""
 							return r
 						}, {}), cb);

@@ -7,10 +7,9 @@ exports.init = function(model) {
 	var res_md = {
 		search: function(params, cb) {
 			//params: {limit: n, id: n, offset: n, text: s, manager_id: s}
-			var mode = (params.mode && _.indexOf(_(views).keys(), params.mode)!=-1) ? params.mode : "short"
 			var cb = arguments[arguments.length-1]
 			var cnd = []
-			var values = [];
+			var values = []
 			function val(v) { return "$" + values.push(v); }
 			if(params.text)
 				cnd.push("_fts @@ plainto_tsquery('pg_catalog.russian', " + val(params.text) + ")")
@@ -46,6 +45,12 @@ exports.init = function(model) {
 				else
 					cb(null, r.rows)
 			})
+		},
+		append_student: function(gr, st, cb) {
+			model.db.query("INSERT INTO groups_users(group_id, user_id) VALUES($1, $2)", [gr, st], cb)
+		},
+		remove_student: function(gr, st, cb) {
+			model.db.query("DELETE FROM groups_users WHERE group_id=$1 AND user_id=$2", [gr, st], cb)
 		},
 		create: function(data, cb) {
 			var fields = []

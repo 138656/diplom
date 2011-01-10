@@ -19,10 +19,14 @@ ${lambda(${ctl} select_window_items) |id:${util.generate_id()} items:[]| #
 	</div>
 	${init(${id})}
 #end}
-${lambda(${ctl} select_window) |id:${util.generate_id()} title| #
-	<div id="${id}" class="ctl-select_window"
-	${ctl.window(id:"${id}_window" title:${title}) #
-		${ctl.list(id:"${id}_list" item_control:select_window_items)}
-	#end}
-	${init(${id})}
+${lambda(${ctl} select_window) |id:${util.generate_id()} title enable_search:""| #
+	<div id="${id}" class="ctl-select_window">
+		${ctl.window(id:"${id}_window" title:${title}) #
+			${if(${enable_search}) #
+				${ctl.string(id:"${id}_search")}
+			#end}
+			${ctl.list(id:"${id}_list" item_control:select_window_items)}
+		#end}
+		${init(${id})}
+	</div>
 #end}

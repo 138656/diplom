@@ -64,8 +64,8 @@ $ctl.control("groups_edit", function(id, nd) {
 			}
 		students.data_source(students_ds)
 	})
-	sel_student.data_source(function(s, l, cb) {
-		$model.users.search({ mode:"combo", offset:s, limit:l, role:"student" }, function(r) {
+	sel_student.data_source(function(txt, s, l, cb) {
+		$model.users.search({ mode:"combo", text: (txt || ""), offset:s, limit:l, role:"student" }, function(r) {
 			if(r.status)
 				cb(_.map(r.data, function(x) {
 						return _.extend(_.clone(x), { action: "$ctl('" + id + "').append_student('" + x.id + "')" })

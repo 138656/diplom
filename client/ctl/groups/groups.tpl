@@ -60,7 +60,7 @@ ${lambda(${ctl} groups_edit) |id:${util.generate_id()}| #
 			${ctl.groups_form(id:"${id}_form")}
 			${ctl.group_title(title:"Ученики" actions:[{id:"${id}_add_student" icon:plus}])}
 			${ctl.list(id:"${id}_students" item_control:groups_students)}
-			${ctl.select_window(id:"${id}_select_student" title:"Выберите ученика")}
+			${ctl.select_window(id:"${id}_select_student" enable_search:"yes" title:"Выберите ученика")}
 		#end}
 		${ctl.content_title("Редактирование класса")}
 		${ctl.content_divider(${content} ${actions})}
